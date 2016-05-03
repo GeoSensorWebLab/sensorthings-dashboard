@@ -16,7 +16,7 @@ That's all. The server is now running at [http://localhost:4200/](http://localho
 
 ## License
 
-MIT License
+Eclipse Public License Version 1.0
 
 ## Authors
 
