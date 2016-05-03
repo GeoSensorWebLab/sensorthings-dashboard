@@ -15,7 +15,7 @@
   "license": "MIT",
   "dependencies": {
     "babel": "^6.1.18",
-    "bootstrap": "^3.3.6",
+    "bootstrap": "git+https://github.com/twbs/bootstrap.git#v4.0.0-alpha.2",
     "broccoli": "^0.16.3",
     "broccoli-babel-transpiler": "^5.5.0",
     "broccoli-browserify": "^0.1.0",
