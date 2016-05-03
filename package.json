@@ -21,15 +21,15 @@
     "broccoli-browserify": "^0.1.0",
     "broccoli-cli": "^1.0.0",
     "broccoli-concat": "^2.1.0",
-    "broccoli-funnel": "^0.2.3",
+    "broccoli-funnel": "^1.0.1",
     "broccoli-gzip": "^0.2.1",
     "broccoli-jade": "^1.0.1",
-    "broccoli-merge-trees": "^0.2.1",
-    "broccoli-sass": "^0.6.6",
+    "broccoli-merge-trees": "^1.1.1",
+    "broccoli-sass": "^0.7.0",
     "broccoli-slow-trees": "^2.0.0",
     "broccoli-template-builder": "git+https://github.com/GeoSensorWebLab/broccoli-template-builder.git",
     "broccoli-uglify-sourcemap": "^1.1.1",
-    "browserify": "^12.0.1",
+    "browserify": "^13.0.0",
     "commander": "^2.8.1",
     "connect-gzip-static": "^1.0.0",
     "copy-dereference": "^1.0.0",
@@ -41,7 +41,7 @@
     "node-sass": "^3.2.0",
     "q": "^1.4.1",
     "rimraf": "^2.4.4",
-    "tiny-lr": "0.0.9",
+    "tiny-lr": "0.2.1",
     "underscore": "^1.8.3"
   }
 }
