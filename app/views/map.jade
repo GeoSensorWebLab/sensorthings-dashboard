@@ -28,7 +28,7 @@ html
 
     div#content.container-fluid
       div.row
-        div.col-sm-3.col-md-2.sidebar
+        div#things-list.col-sm-12.col-md-2.sidebar.hidden-sm-down
           h5 Sensor Stations
           
           ul.list-group
@@ -64,7 +64,12 @@ html
         
         div#map-container.col-xs-12.col-sm-12.col-md-10.col-md-offset-2
           div#map
-          
+      
+      div#mobile-footer.hidden-md-up.navbar-fixed-bottom.bg-inverse
+        div.row
+          div.col-sm-12
+            button.btn.btn-primary.show-things-list &larr; View Sensors List
+            button.btn.btn-primary.show-things-map.pull-xs-right.invisible View Sensors Map &rarr;
     
     script(type="text/javascript").
       $(function() {
@@ -90,4 +95,22 @@ html
         
         // Hide zoom controls for mobile — pinch zoom is more reliable there
         $(".leaflet-control-container").addClass("hidden-sm-down");
+        
+        // Mobile Controls
+        
+        $(".show-things-list").click(function() {
+          $("#things-list").toggleClass("hidden-sm-down");
+          $("#map-container").toggleClass("hidden-sm-down");
+          $(".show-things-list").toggleClass("invisible");
+          $(".show-things-map").toggleClass("invisible");
+          return false;
+        });
+        
+        $(".show-things-map").click(function() {
+          $("#things-list").toggleClass("hidden-sm-down");
+          $("#map-container").toggleClass("hidden-sm-down");
+          $(".show-things-list").toggleClass("invisible");
+          $(".show-things-map").toggleClass("invisible");
+          return false;
+        });
       });
