@@ -87,4 +87,7 @@ html
         L.marker([51.047, -114.09]).addTo(map);
         L.marker([51.047, -114.10]).addTo(map);
         L.marker([51.050, -114.07]).addTo(map);
+        
+        // Hide zoom controls for mobile — pinch zoom is more reliable there
+        $(".leaflet-control-container").addClass("hidden-sm-down");
       });
