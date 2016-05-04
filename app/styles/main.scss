@@ -1,35 +1,19 @@
 // Start with your Sass styles here.
 
-/*
- * Base structure
- */
-
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
   padding-top: 71px;
 }
-
-
-/*
- * Global add-ons
- */
 
 .sub-header {
   padding-bottom: 10px;
   border-bottom: 1px solid #eee;
 }
 
-/*
- * Top navigation
- * Hide default border to remove 1px line.
- */
+
 .navbar-fixed-top {
   border: 0;
 }
-
-/*
- * Sidebar
- */
 
 /* Hide for mobile, show later */
 .sidebar {
@@ -86,22 +70,17 @@ body {
   margin-top: 0;
 }
 
+#map-container {
+  position: fixed;
+  top: 51px;
+  bottom: 0;
+  left: 0;
+}
 
-/*
- * Placeholder dashboard ideas
- */
-
-.placeholders {
-  margin-bottom: 30px;
-  text-align: center;
-}
-.placeholders h4 {
-  margin-bottom: 0;
-}
-.placeholder {
-  margin-bottom: 20px;
-}
-.placeholder img {
-  display: inline-block;
-  border-radius: 50%;
+#map {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
 }
