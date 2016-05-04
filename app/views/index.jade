@@ -1,22 +1,35 @@
 doctype
-html.no-js
+html
   head
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     title Dashboard
     meta(name='description', content='')
-    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
     link(rel="stylesheet", href="/style.css")
 
     script(type="text/javascript", src="/templates.js")
     script(type="text/javascript", src="/app.js")
 
   body
-    <!--[if lt IE 8]>
-    p.browsehappy
-      | You are using an <strong>outdated</strong> browser.
-      | Please <a href="http://browsehappy.com/">upgrade your browser</a>
-      | to improve your experience.
-    <![endif]-->
+    nav.navbar.navbar-dark.navbar-fixed-top.bg-inverse
+      button.navbar-toggler.hidden-sm-up(type="button", data-toggle="collapse", data-target="#navbar", aria-expanded="false", aria-controls="navbar")
+        span.sr-only Toggle Navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      
+      a.navbar-brand(href="#") LOGO
+      
+      div#navbar
+        nav.nav.navbar-nav.pull-right
+          a.nav-item.nav-link(href="#") Map
+          a.nav-item.nav-link(href="#") Multi-Chart
 
-    div#content.container
+    div#content.container-fluid
+      div.row
+        div.col-sm-3.col-md-2.sidebar
+          h1 Sidebar
+        
+        div.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2
+          h1.page-header Main
