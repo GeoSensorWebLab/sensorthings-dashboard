@@ -12,7 +12,7 @@ html
     script(type="text/javascript", src="/app.js")
 
   body
-    nav.navbar.navbar-dark.navbar-fixed-top.bg-inverse
+    nav.navbar.navbar-dark.bg-inverse
       button.navbar-toggler.hidden-sm-up(type="button", data-toggle="collapse", data-target="#navbar", aria-expanded="false", aria-controls="navbar")
         span.sr-only Toggle Navigation
         span.icon-bar
@@ -25,10 +25,18 @@ html
         nav.nav.navbar-nav.pull-right
           a.nav-item.nav-link(href="map.html") Map
 
-    div#content.container-fluid
+    div#content.container
       div.row
-        div.col-sm-3.col-md-2.sidebar
-          h1 Sidebar
-        
-        div.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2
-          h1.page-header Main
+        div.col-sm-12
+          h1.page-header
+            | SensorThings Visualization Dashboard
+          
+          p
+            | View sensor data quickly on our dashboard.
+          
+          h3
+            a.btn.btn-primary(href="/map.html")
+              | View Map &rarr;
+              
+          p.small
+            | Provided by the <a href="http://sensorweb.geomatics.ucalgary.ca">GeoSensorWeb Lab</a>, <a href="https://ucalgary.ca">University of Calgary</a>, 2016
