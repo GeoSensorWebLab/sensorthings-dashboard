@@ -31,40 +31,40 @@ html
           h5 Sensor Stations
           
           ul.list-group
-            li.row.list-group-item
-              div.col-sm-8
+            li.row.list-group-item(data-name="Thing A")
+              div.col-sm-6
                 p 
                   a(href="/thing.html") Thing A
-              div.col-sm-4
-                p ICON
+              div.col-sm-6
+                p 5 Streams
                 
-            li.row.list-group-item
-              div.col-sm-8
+            li.row.list-group-item(data-name="Thing B")
+              div.col-sm-6
                 p 
                   a(href="/thing.html") Thing B
-              div.col-sm-4
-                p ICON
+              div.col-sm-6
+                p 5 Streams
                 
-            li.row.list-group-item
-              div.col-sm-8
+            li.row.list-group-item(data-name="Thing C")
+              div.col-sm-6
                 p 
                   a(href="/thing.html") Thing C
-              div.col-sm-4
-                p ICON
+              div.col-sm-6
+                p 1 Stream
                 
-            li.row.list-group-item
-              div.col-sm-8
+            li.row.list-group-item(data-name="Thing D")
+              div.col-sm-6
                 p 
                   a(href="/thing.html") Thing D
-              div.col-sm-4
-                p ICON
+              div.col-sm-6
+                p 2 Streams
                 
-            li.row.list-group-item
-              div.col-sm-8
+            li.row.list-group-item(data-name="Thing E")
+              div.col-sm-6
                 p 
                   a(href="/thing.html") Thing E
-              div.col-sm-4
-                p ICON
+              div.col-sm-6
+                p 2 Streams
         
         div#map-container.col-xs-12.col-sm-12.col-md-9.col-md-offset-3
           div#map
@@ -77,6 +77,38 @@ html
     
     script(type="text/javascript").
       $(function() {
+        // Things
+        
+        var Things = [
+          {
+            name: "Thing A",
+            datastreamCount: 5,
+            location: [51.049, -114.08]
+          },
+          {
+            name: "Thing B",
+            datastreamCount: 5,
+            location: [51.048, -114.09]
+          },
+          {
+            name: "Thing C",
+            datastreamCount: 1,
+            location: [51.047, -114.09]
+          },
+          {
+            name: "Thing D",
+            datastreamCount: 2,
+            location: [51.047, -114.10]
+          },
+          {
+            name: "Thing E",
+            datastreamCount: 2,
+            location: [51.050, -114.07]
+          }
+        ];
+        
+        // Map
+        
         L.Icon.Default.imagePath = "/images";
         
         var map = L.map('map').setView([51.049, -114.08], 13);
@@ -84,18 +116,30 @@ html
         L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
-      
-        var pulseIcon = L.divIcon({
-          className: 'pulse-icon',
-          html: '<img src="/images/marker-icon.png" srcset="/images/marker-icon-2x.png 2x"><div class="pulse-ring"></div>',
-          iconSize: [22, 22]
+        
+        Things.forEach(function(thing) {
+          var marker = L.marker(thing.location).addTo(map);
+          thing.marker = marker;
         });
         
-        L.marker([51.049, -114.08], { icon: pulseIcon }).addTo(map);
-        L.marker([51.048, -114.09]).addTo(map);
-        L.marker([51.047, -114.09]).addTo(map);
-        L.marker([51.047, -114.10]).addTo(map);
-        L.marker([51.050, -114.07]).addTo(map);
+        // Highlight markers when corresponding item is highlighted in list
+        $("#things-list .list-group-item").on("mouseenter click", function() {
+          var name = $(this).data("name");
+          
+          Things.forEach(function(item) {
+            if (item.name === name) {
+              item.marker.setOpacity(1.0);
+            } else {
+              item.marker.setOpacity(0.5);
+            }
+          });
+        });
+        
+        $("#things-list .list-group").on("mouseleave", function() {
+          Things.forEach(function(item) {
+            item.marker.setOpacity(1.0);
+          });
+        });
         
         // Hide zoom controls for mobile — pinch zoom is more reliable there
         $(".leaflet-control-container").addClass("hidden-sm-down");
