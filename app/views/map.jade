@@ -77,12 +77,9 @@ html
         }).addTo(map);
       
         var pulseIcon = L.divIcon({
-          // Specify a class name we can refer to in CSS.
           className: 'pulse-icon',
-          html: '<img src="/images/marker-icon.png" srcset="/images/marker-icon-2x.png 2x"><div class="pulse-ring"></div>'
-          // Set marker width and height
-          ,iconSize: [22,22]
-          // ,iconAnchor: [11,11]
+          html: '<img src="/images/marker-icon.png" srcset="/images/marker-icon-2x.png 2x"><div class="pulse-ring"></div>',
+          iconSize: [22, 22]
         });
         
         L.marker([51.049, -114.08], { icon: pulseIcon }).addTo(map);
