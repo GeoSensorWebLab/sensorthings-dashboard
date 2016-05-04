@@ -1,15 +1,14 @@
 // Start with your Sass styles here.
 
 /* Move down content because we have a fixed navbar that is 50px tall */
-body {
-  padding-top: 71px;
+#content {
+  padding-top: 50px;
 }
 
 .sub-header {
   padding-bottom: 10px;
   border-bottom: 1px solid #eee;
 }
-
 
 .navbar-fixed-top {
   border: 0;

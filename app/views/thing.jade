@@ -12,7 +12,7 @@ html
     script(type="text/javascript", src="/app.js")
 
   body
-    nav.navbar.navbar-dark.navbar-fixed-top.bg-inverse
+    nav.navbar.navbar-dark.bg-inverse
       button.navbar-toggler.hidden-sm-up(type="button", data-toggle="collapse", data-target="#navbar", aria-expanded="false", aria-controls="navbar")
         span.sr-only Toggle Navigation
         span.icon-bar
@@ -57,7 +57,9 @@ html
           
       div.row.card
         div.col-md-9.card-block
-          h1 Datastream A
+          h1
+            a(name="Datastream-111")
+            | Datastream A
           div#datastream-a-chart.chart
           
         div.col-md-3
@@ -82,7 +84,9 @@ html
 
       div.row.card
         div.col-md-9.card-block
-          h1 Datastream B
+          h1
+            a(name="Datastream-112")
+            | Datastream B
           div#datastream-b-chart.chart
           
         div.col-md-3
@@ -107,7 +111,9 @@ html
                 
       div.row.card
         div.col-md-9.card-block
-          h1 Datastream C
+          h1
+            a(name="Datastream-113")
+            | Datastream C
           div#datastream-c-chart.chart
           
         div.col-md-3
@@ -160,21 +166,21 @@ html
         
         // Charts
         drawChart("#datastream-a-chart", {
-          color: colorForId(11111),
+          color: colorForId(111),
           unitOfMeasurement: {
             name: "Volts",
             symbol: "V"
           }
         });
         drawChart("#datastream-b-chart", {
-          color: colorForId(1121),
+          color: colorForId(112),
           unitOfMeasurement: {
             name: "Metres",
             symbol: "m"
           }
         });
         drawChart("#datastream-c-chart", {
-          color: colorForId(3000),
+          color: colorForId(113),
           unitOfMeasurement: {
             name: "Degrees Celsius",
             symbol: "˚C"
