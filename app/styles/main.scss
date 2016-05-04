@@ -84,3 +84,27 @@ body {
   left: 0;
   bottom: 0;
 }
+
+.pulse-icon {
+  img {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    z-index: 250;
+  }
+}
+
+.pulse-ring {
+  border: 3px solid #F00;
+  -webkit-border-radius: 30px;
+  height: 36px;
+  width: 36px;
+  -webkit-animation: pulsate 2s ease-out;
+  -webkit-animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes pulsate {
+  0% {-webkit-transform: scale(0.1, 0.1); opacity: 0.0;}
+  50% {opacity: 1.0;}
+  100% {-webkit-transform: scale(1.2, 1.2); opacity: 0.0;}
+}

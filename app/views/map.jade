@@ -68,10 +68,26 @@ html
     
     script(type="text/javascript").
       $(function() {
+        L.Icon.Default.imagePath = "/images";
+        
         var map = L.map('map').setView([51.049, -114.08], 13);
 
         L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
       
+        var pulseIcon = L.divIcon({
+          // Specify a class name we can refer to in CSS.
+          className: 'pulse-icon',
+          html: '<img src="/images/marker-icon.png" srcset="/images/marker-icon-2x.png 2x"><div class="pulse-ring"></div>'
+          // Set marker width and height
+          ,iconSize: [22,22]
+          // ,iconAnchor: [11,11]
+        });
+        
+        L.marker([51.049, -114.08], { icon: pulseIcon }).addTo(map);
+        L.marker([51.048, -114.09]).addTo(map);
+        L.marker([51.047, -114.09]).addTo(map);
+        L.marker([51.047, -114.10]).addTo(map);
+        L.marker([51.050, -114.07]).addTo(map);
       });
