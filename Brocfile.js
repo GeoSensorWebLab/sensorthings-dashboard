@@ -41,7 +41,6 @@ var defaultOptions = {
 var bootstrap   = funnel('node_modules/bootstrap/dist', defaultOptions);
 var fontAwesome = funnel('node_modules/font-awesome', defaultOptions);
 var jquery      = funnel('node_modules/jquery/dist', defaultOptions);
-var json2       = funnel('node_modules/json2/lib/JSON2/static', defaultOptions);
 var leaflet     = funnel('node_modules/leaflet/dist', defaultOptions);
 var q           = funnel('node_modules/q', defaultOptions);
 var underscore  = funnel('node_modules/underscore', defaultOptions);
@@ -51,7 +50,6 @@ var libraryTree = mergeTrees([
   bootstrap,
   fontAwesome,
   jquery,
-  json2,
   leaflet,
   q,
   underscore,
@@ -68,7 +66,6 @@ var allScripts = concat(mergeTrees([
   inputFiles: [
     'q.js',
     'jquery.js',
-    'json2.js',
     'underscore.js',
     'leaflet-src.js',
     'app.js'
