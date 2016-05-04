@@ -1,0 +1,146 @@
+doctype
+html
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    title Dashboard
+    meta(name='description', content='')
+    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    link(rel="stylesheet", href="/style.css")
+
+    script(type="text/javascript", src="/templates.js")
+    script(type="text/javascript", src="/app.js")
+
+  body
+    nav.navbar.navbar-dark.navbar-fixed-top.bg-inverse
+      button.navbar-toggler.hidden-sm-up(type="button", data-toggle="collapse", data-target="#navbar", aria-expanded="false", aria-controls="navbar")
+        span.sr-only Toggle Navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      
+      a.navbar-brand(href="index.html") LOGO
+      
+      div#navbar
+        nav.nav.navbar-nav.pull-right
+          a.nav-item.nav-link(href="map.html") Map
+          a.nav-item.nav-link(href="#") Multi-Chart
+
+    div#content.container
+      div.row.card
+        div.col-sm-8.card-block
+          h1.page-header Thing A
+        
+          dl
+            dt Description
+            dd Station #3B of type 2A.
+          
+        div#small-map-container.col-sm-4
+          div#map
+          
+      div.row.card
+        div.col-sm-3.card-block
+          h4 Time Range
+        div.col-sm-4.card-block
+          h4 
+            a(href="#")
+              | May 1 2016 00:00:00 UTC &nbsp;
+              i.fa.fa-calendar
+        div.col-sm-1.card-block
+          h4 to
+        div.col-sm-4.card-block
+          h4
+            a(href="#")
+              | May 2 2016 00:00:00 UTC &nbsp;
+              i.fa.fa-calendar
+          
+      div.row.card
+        div.col-sm-9.card-block
+          h1 Datastream A
+          
+        div.col-sm-3
+          table.table
+            thead
+              tr
+                th Stat
+                th Value
+            tbody
+              tr
+                td Current
+                td 5.5 ms
+              tr
+                td Min
+                td 3.1 ms
+              tr
+                td Max
+                td 5.6 ms
+              tr
+                td Average
+                td 3.9 ms
+
+      div.row.card
+        div.col-sm-9.card-block
+          h1 Datastream B
+          
+        div.col-sm-3
+          table.table
+            thead
+              tr
+                th Stat
+                th Value
+            tbody
+              tr
+                td Current
+                td 5.5 ms
+              tr
+                td Min
+                td 3.1 ms
+              tr
+                td Max
+                td 5.6 ms
+              tr
+                td Average
+                td 3.9 ms
+                
+      div.row.card
+        div.col-sm-9.card-block
+          h1 Datastream C
+          
+        div.col-sm-3
+          table.table
+            thead
+              tr
+                th Stat
+                th Value
+            tbody
+              tr
+                td Current
+                td 5.5 ms
+              tr
+                td Min
+                td 3.1 ms
+              tr
+                td Max
+                td 5.6 ms
+              tr
+                td Average
+                td 3.9 ms
+          
+    script(type="text/javascript").
+      $(function() {
+        L.Icon.Default.imagePath = "/images";
+        
+        var map = L.map('map').setView([51.049, -114.08], 13);
+
+        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+      
+        var pulseIcon = L.divIcon({
+          className: 'pulse-icon',
+          html: '<img src="/images/marker-icon.png" srcset="/images/marker-icon-2x.png 2x"><div class="pulse-ring"></div>',
+          iconSize: [22, 22]
+        });
+        
+        L.marker([51.049, -114.08], { icon: pulseIcon }).addTo(map);
+      });
