@@ -94,6 +94,7 @@ var allStyles = concat(mergeTrees([
   ],
   outputFile: 'style.css',
   sourceMapConfig: {
+    enabled: false,
     extensions: ['css'],
     mapCommentType: 'block'
   }
