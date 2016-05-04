@@ -39,18 +39,22 @@ var defaultOptions = {
 };
 
 var bootstrap   = funnel('node_modules/bootstrap/dist', defaultOptions);
+var d3          = funnel('node_modules/d3', defaultOptions);
 var fontAwesome = funnel('node_modules/font-awesome', defaultOptions);
 var jquery      = funnel('node_modules/jquery/dist', defaultOptions);
 var leaflet     = funnel('node_modules/leaflet/dist', defaultOptions);
+var nvd3        = funnel('node_modules/nvd3/build', defaultOptions);
 var q           = funnel('node_modules/q', defaultOptions);
 var underscore  = funnel('node_modules/underscore', defaultOptions);
 var vendor      = funnel('vendor', defaultOptions);
 
 var libraryTree = mergeTrees([
   bootstrap,
+  d3,
   fontAwesome,
   jquery,
   leaflet,
+  nvd3,
   q,
   underscore,
   vendor
@@ -68,6 +72,8 @@ var allScripts = concat(mergeTrees([
     'jquery.js',
     'underscore.js',
     'leaflet-src.js',
+    'd3.js',
+    'nv.d3.js',
     'app.js'
   ],
   outputFile: 'app.js'
@@ -90,6 +96,7 @@ var allStyles = concat(mergeTrees([
     'css/bootstrap.css',
     'css/font-awesome.css',
     'leaflet.css',
+    'nv.d3.css',
     'app.css'
   ],
   outputFile: 'style.css',

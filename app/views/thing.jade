@@ -58,6 +58,7 @@ html
       div.row.card
         div.col-sm-9.card-block
           h1 Datastream A
+          div#datastream-a-chart.chart
           
         div.col-sm-3
           table.table
@@ -82,6 +83,7 @@ html
       div.row.card
         div.col-sm-9.card-block
           h1 Datastream B
+          div#datastream-b-chart.chart
           
         div.col-sm-3
           table.table
@@ -106,6 +108,7 @@ html
       div.row.card
         div.col-sm-9.card-block
           h1 Datastream C
+          div#datastream-c-chart.chart
           
         div.col-sm-3
           table.table
@@ -129,6 +132,8 @@ html
           
     script(type="text/javascript").
       $(function() {
+        // Map
+        
         L.Icon.Default.imagePath = "/images";
         
         var map = L.map('map', {
@@ -152,4 +157,27 @@ html
         });
         
         L.marker([51.049, -114.08], { icon: pulseIcon }).addTo(map);
+        
+        // Charts
+        drawChart("#datastream-a-chart", {
+          color: colorForId(11111),
+          unitOfMeasurement: {
+            name: "Volts",
+            symbol: "V"
+          }
+        });
+        drawChart("#datastream-b-chart", {
+          color: colorForId(1121),
+          unitOfMeasurement: {
+            name: "Metres",
+            symbol: "m"
+          }
+        });
+        drawChart("#datastream-c-chart", {
+          color: colorForId(3000),
+          unitOfMeasurement: {
+            name: "Degrees Celsius",
+            symbol: "˚C"
+          }
+        });
       });
