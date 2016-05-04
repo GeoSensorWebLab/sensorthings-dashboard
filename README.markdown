@@ -2,6 +2,11 @@
 
 A basic dashboard for SensorThings.
 
+## Requirements
+
+* Node 6.0.0 or newer
+* NPM 3.6 or newer
+
 ## Development Environment
 
 The app is JavaScript and builds using [Node.js](https://nodejs.org/). To start, install the base Node packages:
