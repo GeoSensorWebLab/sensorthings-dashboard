@@ -12,7 +12,7 @@ html
     script(type="text/javascript", src="/app.js")
 
   body
-    nav.navbar.navbar-full.navbar-dark.bg-inverse
+    nav.navbar.navbar-dark.bg-inverse
       button.navbar-toggler.hidden-sm-up(type="button", data-toggle="collapse", data-target="#navbar", aria-expanded="false", aria-controls="navbar")
         span.sr-only Toggle Navigation
         span.icon-bar
@@ -27,17 +27,24 @@ html
           a.nav-item.nav-link(href="settings.html") Settings
 
     div#content.container
-      div.row
-        div.col-sm-12
+      div.row.card
+        div.col-sm-12.card-block
           h1.page-header
-            | SensorThings Visualization Dashboard
+            | SensorThings URL
           
           p
-            | View sensor data quickly on our dashboard.
+            | Change the default SensorThings URL for loading resources.<br>
+            | If you have a link with a different SensorThings URL, that will take precedence over this setting although it will not overwrite this setting.
           
-          h3
-            a.btn.btn-primary(href="/map.html")
-              | View Map &rarr;
-              
-          p.small
-            | Provided by the <a href="http://sensorweb.geomatics.ucalgary.ca">GeoSensorWeb Lab</a>, <a href="https://ucalgary.ca">University of Calgary</a>, 2016
+          fieldset.form-group
+            input.form-control(type="text", value="http://ogc-pilot.sensorup.com:8080/OGCSensorThings/v1.0/")
+          
+          fieldset.form-group
+            label Or select a new SensorThings URL
+            select.form-control
+              option Use above field
+              option http://ogc-pilot.sensorup.com:8080/OGCSensorThings/v1.0/
+              option http://scratchpad.sensorup.com/OGCSensorThings/v1.0/
+          
+          p
+            button.btn.btn-primary Apply
