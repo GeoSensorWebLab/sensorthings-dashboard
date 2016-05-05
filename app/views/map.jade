@@ -75,16 +75,24 @@ html
           });
           
           // Load feature markers asynchronously.
-          // We use circle markers as we can style them with path CSS.
-          var createMarker = function(feature, latlng) {
-            return L.circleMarker(latlng);
-          };
-          
           things.forEach(function(thing) {
             thing.getLocations()
             .then((locations) => {
               var location = locations[0];
               if (location && location.get("location")) {
+                // Generate HTML for popup
+                var properties = $.extend({}, thing.attributes, { 
+                  stURL: encodeURIComponent(ParamsController.get("stURL"))
+                });
+                var template = JST["marker-popup"](properties);
+                
+                // We use circle markers as we can style them with path CSS.
+                var createMarker = function(feature, latlng) {
+                  var marker = L.circleMarker(latlng);
+                  marker.bindPopup(template);
+                  return marker;
+                };
+                
                 var feature = L.geoJson(location.get("location"), {
                   pointToLayer: createMarker
                 }).addTo(map);
