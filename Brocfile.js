@@ -82,6 +82,12 @@ helper.loadLibrary('node_modules/underscore', {
   assets: []
 });
 
+helper.loadLibrary('node_modules/pluralize', {
+  scripts: ['pluralize.js'],
+  styles: [],
+  assets: []
+});
+
 helper.loadLibrary('vendor', {
   scripts: [],
   styles: [],
