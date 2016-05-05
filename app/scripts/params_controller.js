@@ -23,6 +23,10 @@ class ParamsController {
     return params.join("&");
   }
 
+  get(key) {
+    return this.activeParams.get(key);
+  }
+
   // Retrieve current URL query parameters as a hash
   parse() {
     var params = new Map();

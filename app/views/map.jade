@@ -32,40 +32,6 @@ html
           h5 Sensor Stations
           
           ul.list-group
-            li.row.list-group-item(data-name="Thing A")
-              div.col-sm-6
-                p 
-                  a(href="/thing.html") Thing A
-              div.col-sm-6
-                p 5 Streams
-                
-            li.row.list-group-item(data-name="Thing B")
-              div.col-sm-6
-                p 
-                  a(href="/thing.html") Thing B
-              div.col-sm-6
-                p 5 Streams
-                
-            li.row.list-group-item(data-name="Thing C")
-              div.col-sm-6
-                p 
-                  a(href="/thing.html") Thing C
-              div.col-sm-6
-                p 1 Stream
-                
-            li.row.list-group-item(data-name="Thing D")
-              div.col-sm-6
-                p 
-                  a(href="/thing.html") Thing D
-              div.col-sm-6
-                p 2 Streams
-                
-            li.row.list-group-item(data-name="Thing E")
-              div.col-sm-6
-                p 
-                  a(href="/thing.html") Thing E
-              div.col-sm-6
-                p 2 Streams
         
         div#map-container.col-xs-12.col-sm-12.col-md-9.col-md-offset-3
           div#map
@@ -78,69 +44,74 @@ html
     
     script(type="text/javascript").
       $(function() {
+        // Update query params in URL, get SensorThings URL from query params
+        // or from LocalStorage.
         ParamsController.activate();
+        var ST = new SensorThings(ParamsController.get("stURL"));
         
         // Things
+        var Things = ST.getThings();
         
-        var Things = [
-          {
-            name: "Thing A",
-            datastreamCount: 5,
-            location: [51.049, -114.08]
-          },
-          {
-            name: "Thing B",
-            datastreamCount: 5,
-            location: [51.048, -114.09]
-          },
-          {
-            name: "Thing C",
-            datastreamCount: 1,
-            location: [51.047, -114.09]
-          },
-          {
-            name: "Thing D",
-            datastreamCount: 2,
-            location: [51.047, -114.10]
-          },
-          {
-            name: "Thing E",
-            datastreamCount: 2,
-            location: [51.050, -114.07]
-          }
-        ];
+        // Populate List
+        
+        Q(Things).then(function(things) {
+          things.forEach(function(thing) {
+            var properties = $.extend({}, thing.attributes, { 
+              stURL: encodeURIComponent(ParamsController.get("stURL"))
+            });
+            var template = JST["thing-list-item"](properties);
+            $("#things-list ul").append(template);
+          });
+        });
         
         // Map
         
         L.Icon.Default.imagePath = "/images";
         
-        var map = L.map('map').setView([51.049, -114.08], 13);
+        var map = L.map('map').setView([51.049, -114.08], 8);
 
         L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
         
-        Things.forEach(function(thing) {
-          var marker = L.marker(thing.location).addTo(map);
-          thing.marker = marker;
-        });
-        
-        // Highlight markers when corresponding item is highlighted in list
-        $("#things-list .list-group-item").on("mouseenter click", function() {
-          var name = $(this).data("name");
-          
-          Things.forEach(function(item) {
-            if (item.name === name) {
-              item.marker.setOpacity(1.0);
-            } else {
-              item.marker.setOpacity(0.5);
-            }
+        // Load markers asynchronously
+        Q(Things).then(function(things) {
+          things.forEach(function(thing) {
+            thing.getLocations()
+            .then((locations) => {
+              var location = locations[0];
+              if (location && location.get("location")) {
+                var feature = L.geoJson(location.get("location")).addTo(map);
+                thing.set("mapFeature", feature);
+              }
+            });
           });
         });
         
-        $("#things-list .list-group").on("mouseleave", function() {
-          Things.forEach(function(item) {
-            item.marker.setOpacity(1.0);
+        // Highlight markers when corresponding item is highlighted in list.
+        // Only activate once things have been loaded
+        Q(Things).then(function(things) {
+          $("#things-list .list-group-item").on("mouseenter click", function() {
+            var name = $(this).data("name");
+            
+            things.forEach(function(thing) {
+              if (thing.get("marker") === undefined) {
+                // do nothing
+              } else if (thing.get("name") === name) {
+                thing.get("marker").setOpacity(1.0);
+              } else {
+                thing.get("marker").setOpacity(0.5);
+              }
+            });
+          });
+          
+          $("#things-list .list-group").on("mouseleave", function() {
+            things.forEach(function(thing) {
+              var marker = thing.get("marker");
+              if (marker) {
+                marker.setOpacity(1.0);
+              }
+            });
           });
         });
         
