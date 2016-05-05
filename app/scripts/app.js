@@ -4,6 +4,7 @@ import './chart';
 import './color_generator';
 import './notifier';
 import ParamsController from './params_controller';
-import './settings';
+import Settings from './settings';
 
-window.ParamsController = new ParamsController({ settings: Settings });
+window.Settings = new Settings();
+window.ParamsController = new ParamsController({ settings: window.Settings });
