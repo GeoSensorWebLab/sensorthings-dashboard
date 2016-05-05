@@ -37,14 +37,36 @@ html
             | If you have a link with a different SensorThings URL, that will take precedence over this setting although it will not overwrite this setting.
           
           fieldset.form-group
-            input.form-control(type="text", value="http://ogc-pilot.sensorup.com:8080/OGCSensorThings/v1.0/")
+            input#custom-url.form-control(type="text", value="Loading…", disabled)
           
           fieldset.form-group
             label Or select a new SensorThings URL
-            select.form-control
-              option Use above field
+            select#predefined-servers.form-control
+              option(value="other") Use above field
               option http://ogc-pilot.sensorup.com:8080/OGCSensorThings/v1.0/
               option http://scratchpad.sensorup.com/OGCSensorThings/v1.0/
           
           p
-            button.btn.btn-primary Apply
+            button.btn.btn-primary.apply-settings Apply
+          
+          div#notify
+            div.error.alert.alert-error
+            div.success.alert.alert-success
+            div.warning.alert.alert-warning
+            
+    script(type="text/javascript").
+      $(function() {
+        $("#custom-url").val(Settings.getSensorThingsURL()).prop("disabled", false);
+        
+        $(".apply-settings").click(function() {
+          var selectVal = $("#predefined-servers").val();
+          
+          if (selectVal === "other") {
+            Settings.setSensorThingsURL($("#custom-url").val());
+          } else {
+            Settings.setSensorThingsURL(selectVal);
+            $("#custom-url").val(selectVal);
+          }
+          Notify.success("SensorThings URL updated.");
+        });
+      });

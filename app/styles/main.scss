@@ -63,6 +63,10 @@
   margin-top: 0;
 }
 
+#notify > div {
+  display: none;
+}
+
 #map-container {
   position: fixed;
   top: 54px;
