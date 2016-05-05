@@ -1,10 +1,10 @@
+import Generic from './generic';
 import Datastream from './datastream';
 import Location from './location';
 
-class Thing {
+class Thing extends Generic {
   constructor(data) {
-    // Copy properties to this instance
-    this.attributes = data;
+    super(data);
 
     this.datastreams = [];
     this.locations   = [];
@@ -24,14 +24,6 @@ class Thing {
       });
       delete this.attributes["Locations"];
     }
-  }
-
-  get(key) {
-    return this.attributes[key];
-  }
-
-  set(key, value) {
-    this.attributes[key] = value;
   }
 
   // * Request Handling * //

@@ -1,15 +1,8 @@
-class Location {
+import Generic from './generic';
+
+class Location extends Generic {
   constructor(data) {
-    // Copy properties to this instance
-    this.attributes = data;
-  }
-
-  get(key) {
-    return this.attributes[key];
-  }
-
-  set(key, value) {
-    this.attributes[key] = value;
+    super(data);
   }
 }
 
