@@ -1,0 +1,16 @@
+<h1 class="page-header"><%= obj.description %></h1>
+
+<dl>
+  <dt>ID</dt>
+  <dd><%= obj["@iot.id"] %></dd>
+
+  <dt>Location Description</dt>
+  <dd><%= obj.locationDescription %></dd>
+
+  <dt>Properties</dt>
+  <dd>
+<pre>
+<%= JSON.stringify(obj.properties, null, "  ") %>
+</pre>
+  </dd>
+</dl>

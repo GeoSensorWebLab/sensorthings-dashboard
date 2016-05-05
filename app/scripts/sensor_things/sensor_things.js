@@ -35,6 +35,18 @@ class SensorThings {
     return Q($.ajax(options));
   }
 
+  getThing(id, options = {}) {
+    return Q(this.getLinks())
+    .then((links) => {
+      $.extend(options, this.defaultAjaxOptions);
+      options.url = links["Things"] + `(${id})`;
+      return Q($.ajax(options))
+      .then((response) => {
+        return new Thing(response);
+      });
+    });
+  }
+
   getThings(options = {}) {
     return Q(this.getLinks())
     .then((links) => {
