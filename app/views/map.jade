@@ -52,18 +52,6 @@ html
         // Things
         var Things = ST.getThings();
         
-        // Populate List
-        
-        Q(Things).then(function(things) {
-          things.forEach(function(thing) {
-            var properties = $.extend({}, thing.attributes, { 
-              stURL: encodeURIComponent(ParamsController.get("stURL"))
-            });
-            var template = JST["thing-list-item"](properties);
-            $("#things-list ul").append(template);
-          });
-        });
-        
         // Map
         
         L.Icon.Default.imagePath = "/images";
@@ -74,45 +62,69 @@ html
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
         
-        // Load markers asynchronously
+        // Data Load Handler
         Q(Things).then(function(things) {
+          
+          // Populate List
+          things.forEach(function(thing) {
+            var properties = $.extend({}, thing.attributes, { 
+              stURL: encodeURIComponent(ParamsController.get("stURL"))
+            });
+            var template = JST["thing-list-item"](properties);
+            $("#things-list ul").append(template);
+          });
+          
+          // Load feature markers asynchronously.
+          // We use circle markers as we can style them with path CSS.
+          var createMarker = function(feature, latlng) {
+            return L.circleMarker(latlng);
+          };
+          
           things.forEach(function(thing) {
             thing.getLocations()
             .then((locations) => {
               var location = locations[0];
               if (location && location.get("location")) {
-                var feature = L.geoJson(location.get("location")).addTo(map);
+                var feature = L.geoJson(location.get("location"), {
+                  pointToLayer: createMarker
+                }).addTo(map);
                 thing.set("mapFeature", feature);
               }
             });
           });
-        });
-        
-        // Highlight markers when corresponding item is highlighted in list.
-        // Only activate once things have been loaded
-        Q(Things).then(function(things) {
+          
+          // Highlight markers when corresponding item is highlighted in list.
+          // Only activate once things have been loaded
+          var activeStyle = function() {
+            return { opacity: 0.5, fillOpacity: 0.2 };
+          };
+          var inactiveStyle = function() {
+            return { opacity: 0.05, fillOpacity: 0.05 };
+          };
+          
           $("#things-list .list-group-item").on("mouseenter click", function() {
-            var name = $(this).data("name");
+            var id = $(this).data("id");
             
             things.forEach(function(thing) {
-              if (thing.get("marker") === undefined) {
+              if (thing.get("mapFeature") === undefined) {
                 // do nothing
-              } else if (thing.get("name") === name) {
-                thing.get("marker").setOpacity(1.0);
+              } else if (thing.get("@iot.id") === id) {
+                thing.get("mapFeature").setStyle(activeStyle);
               } else {
-                thing.get("marker").setOpacity(0.5);
+                thing.get("mapFeature").setStyle(inactiveStyle);
               }
             });
           });
           
           $("#things-list .list-group").on("mouseleave", function() {
             things.forEach(function(thing) {
-              var marker = thing.get("marker");
+              var marker = thing.get("mapFeature");
               if (marker) {
-                marker.setOpacity(1.0);
+                marker.setStyle(activeStyle);
               }
             });
           });
+          
         });
         
         // Hide zoom controls for mobile — pinch zoom is more reliable there
