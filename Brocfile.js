@@ -8,74 +8,91 @@ var concat          = require('broccoli-concat');
 var compileSass     = require('broccoli-sass');
 var funnel          = require('broccoli-funnel');
 var gzip            = require('broccoli-gzip');
+var helper          = require('./helpers/broccoli');
 var jade            = require('broccoli-jade');
 var mergeTrees      = require('broccoli-merge-trees');
 var templateBuilder = require('broccoli-template-builder');
 var uglify          = require('broccoli-uglify-sourcemap');
 
-var sassDir = 'app/styles';
-var scripts = 'app/scripts';
-
 // Covert main.scss stylesheet to app.css stylesheet in output directory
-var styles = compileSass([sassDir], 'main.scss', 'app.css');
+var styles = compileSass(['app/styles'], 'main.scss', 'app.css');
 
 // Process all the JavaScript.
 // First we use babel to convert the ES6 to ES5 for web browsers.
-scripts = babel(scripts);
 // Then use browserify to handle any `require` statements and automatically
 // insert the required library inline.
+var scripts = babel("app/scripts");
 scripts = browserify(scripts, {
   entries: ['./app.js'],
   outputFile: 'app.js'
 });
 
-// == Funnel external libraries into individual trees ==
-var defaultOptions = {
-  include: [
-    "**/*.css",
-    "**/*.js",
-    "**/*.map"
-  ]
-};
+// == Load External Libraries ==
+// Order is important. Scripts will be concatenated in this order, and
+// styles will be concatenated in this order (into separate JS and CSS files
+// obviously).
+// Assets will be funnelled into a single tree with the same name
+// as the source asset directory. (e.g. 'img' directory will create 'img'
+// directory in output.)
+helper.loadLibrary('node_modules/bootstrap/dist', {
+  scripts: [],
+  styles: ['css/bootstrap.css'],
+  assets: ['']
+});
 
-var bootstrap   = funnel('node_modules/bootstrap/dist', defaultOptions);
-var d3          = funnel('node_modules/d3', defaultOptions);
-var fontAwesome = funnel('node_modules/font-awesome', defaultOptions);
-var jquery      = funnel('node_modules/jquery/dist', defaultOptions);
-var leaflet     = funnel('node_modules/leaflet/dist', defaultOptions);
-var nvd3        = funnel('node_modules/nvd3/build', defaultOptions);
-var q           = funnel('node_modules/q', defaultOptions);
-var underscore  = funnel('node_modules/underscore', defaultOptions);
-var vendor      = funnel('vendor', defaultOptions);
+helper.loadLibrary('node_modules/d3', {
+  scripts: ['d3.js'],
+  styles: [],
+  assets: []
+});
 
-var libraryTree = mergeTrees([
-  bootstrap,
-  d3,
-  fontAwesome,
-  jquery,
-  leaflet,
-  nvd3,
-  q,
-  underscore,
-  vendor
-]);
+helper.loadLibrary('node_modules/font-awesome', {
+  scripts: [],
+  styles: ['css/font-awesome.css'],
+  assets: ['fonts']
+});
+
+helper.loadLibrary('node_modules/jquery/dist', {
+  scripts: ['jquery.js'],
+  styles: [],
+  assets: []
+});
+
+helper.loadLibrary('node_modules/leaflet/dist', {
+  scripts: ['leaflet-src.js'],
+  styles: ['leaflet.css'],
+  assets: ['images']
+});
+
+helper.loadLibrary('node_modules/nvd3/build', {
+  scripts: ['nv.d3.js'],
+  styles: ['nv.d3.css'],
+  assets: []
+});
+
+helper.loadLibrary('node_modules/q', {
+  scripts: ['q.js'],
+  styles: [],
+  assets: []
+});
+
+helper.loadLibrary('node_modules/underscore', {
+  scripts: ['underscore.js'],
+  styles: [],
+  assets: []
+});
+
+helper.loadLibrary('vendor', {
+  scripts: [],
+  styles: [],
+  assets: ['images']
+});
 
 // == Concatenate script trees ==
-// Use inputFiles to specify loading order.
-
-var allScripts = concat(mergeTrees([
-  libraryTree,
-  scripts
-]), {
-  inputFiles: [
-    'q.js',
-    'jquery.js',
-    'underscore.js',
-    'leaflet-src.js',
-    'd3.js',
-    'nv.d3.js',
-    'app.js'
-  ],
+// Merge the libraries tree with the app scripts tree, then concatenate into
+// a single script file.
+var allScripts = concat(mergeTrees([helper.getScriptsTree(), scripts]), {
+  inputFiles: ['libraries.js', 'app.js'],
   outputFile: 'app.js'
 });
 
@@ -86,39 +103,14 @@ if (process.env["NODE_ENV"] === "production") {
 }
 
 // == Concatenate style trees ==
-// Use inputFiles to specify loading order.
-
-var allStyles = concat(mergeTrees([
-  libraryTree,
-  styles
-]), {
-  inputFiles: [
-    'css/bootstrap.css',
-    'css/font-awesome.css',
-    'leaflet.css',
-    'nv.d3.css',
-    'app.css'
-  ],
+var allStyles = concat(mergeTrees([helper.getStylesTree(), styles]), {
+  inputFiles: ['libraries.css', 'app.css'],
   outputFile: 'style.css',
   sourceMapConfig: {
     enabled: false,
     extensions: ['css'],
     mapCommentType: 'block'
   }
-});
-
-// == Funnel external assets into individual trees ==
-
-var faFonts = funnel('node_modules/font-awesome/fonts', {
-  destDir: 'fonts'
-});
-
-var leafletAssets = funnel('node_modules/leaflet/dist/images', {
-  destDir: 'images'
-});
-
-var vendorAssets = funnel('vendor/images', {
-  destDir: 'images'
 });
 
 // This builds all the Javascript Templates (JST) into JS files where the
@@ -142,9 +134,8 @@ if (process.env["NODE_ENV"] === "production") {
   doGZIP = function(node) { return node; };
 }
 
-module.exports = doGZIP(mergeTrees([views, templates, vendorAssets,
-  faFonts,
-  leafletAssets,
+module.exports = doGZIP(mergeTrees([views, templates,
+  helper.getAssetsTree(),
   allStyles,
   allScripts
 ]), {
