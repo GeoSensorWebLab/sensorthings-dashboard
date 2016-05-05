@@ -1,7 +1,11 @@
 // Settings class for accessing application preferences
 class Settings {
   getSensorThingsURL() {
-    return localStorage.getItem('sensorThingsURL');
+    var val = localStorage.getItem('sensorThingsURL');
+    if (val === null) {
+      val = "http://scratchpad.sensorup.com/OGCSensorThings/v1.0/";
+    }
+    return val;
   }
 
   setSensorThingsURL(url) {
