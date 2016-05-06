@@ -55,86 +55,7 @@ html
               | &nbsp;
               i.fa.fa-calendar            
           
-      div.row.card
-        div.col-md-9.card-block
-          h1
-            a(name="Datastream-111")
-            | Datastream A
-          div#datastream-a-chart.chart
-          
-        div.col-md-3
-          table.table
-            thead
-              tr
-                th Stat
-                th Value
-            tbody
-              tr
-                td Current
-                td 5.5 ms
-              tr
-                td Min
-                td 3.1 ms
-              tr
-                td Max
-                td 5.6 ms
-              tr
-                td Average
-                td 3.9 ms
-
-      div.row.card
-        div.col-md-9.card-block
-          h1
-            a(name="Datastream-112")
-            | Datastream B
-          div#datastream-b-chart.chart
-          
-        div.col-md-3
-          table.table
-            thead
-              tr
-                th Stat
-                th Value
-            tbody
-              tr
-                td Current
-                td 5.5 ms
-              tr
-                td Min
-                td 3.1 ms
-              tr
-                td Max
-                td 5.6 ms
-              tr
-                td Average
-                td 3.9 ms
-                
-      div.row.card
-        div.col-md-9.card-block
-          h1
-            a(name="Datastream-113")
-            | Datastream C
-          div#datastream-c-chart.chart
-          
-        div.col-md-3
-          table.table
-            thead
-              tr
-                th Stat
-                th Value
-            tbody
-              tr
-                td Current
-                td 5.5 ms
-              tr
-                td Min
-                td 3.1 ms
-              tr
-                td Max
-                td 5.6 ms
-              tr
-                td Average
-                td 3.9 ms
+      div#datastreams
           
     script(type="text/javascript").
       $(function() {
@@ -202,30 +123,30 @@ html
             }
           });
           
+          // Load Datastreams
+          Q(thing.datastreams)
+          .then(function(datastreams) {
+            datastreams.forEach(function(datastream) {
+              // Draw template for each datastream
+              var template = JST["datastream-card"](datastream.attributes);
+              $("#datastreams").append(template);
+              
+              // Draw an empty chart
+              var id = datastream.get("@iot.id");
+              var chart = drawChart(`#datastream-${id}-chart`, {
+                color: colorForId(id),
+                unitOfMeasurement: {
+                  name: "Volts",
+                  symbol: "V"
+                }
+              });
+              
+              // Load observations data into the chart
+              //- chart.loadData(observations);
+            });
+          });
+          
           
         })
         .done();
-        
-        // Charts
-        drawChart("#datastream-a-chart", {
-          color: colorForId(111),
-          unitOfMeasurement: {
-            name: "Volts",
-            symbol: "V"
-          }
-        });
-        drawChart("#datastream-b-chart", {
-          color: colorForId(112),
-          unitOfMeasurement: {
-            name: "Metres",
-            symbol: "m"
-          }
-        });
-        drawChart("#datastream-c-chart", {
-          color: colorForId(113),
-          unitOfMeasurement: {
-            name: "Degrees Celsius",
-            symbol: "˚C"
-          }
-        });
       });
