@@ -34,8 +34,20 @@ scripts = browserify(scripts, {
 // Assets will be funnelled into a single tree with the same name
 // as the source asset directory. (e.g. 'img' directory will create 'img'
 // directory in output.)
+helper.loadLibrary('node_modules/jquery/dist', {
+  scripts: ['jquery.js'],
+  styles: [],
+  assets: []
+});
+
+helper.loadLibrary('node_modules/tether/dist', {
+  scripts: ['js/tether.js'],
+  styles: ['css/tether.css'],
+  assets: []
+});
+
 helper.loadLibrary('node_modules/bootstrap/dist', {
-  scripts: [],
+  scripts: ['js/bootstrap.js'],
   styles: ['css/bootstrap.css'],
   assets: ['']
 });
@@ -50,12 +62,6 @@ helper.loadLibrary('node_modules/font-awesome', {
   scripts: [],
   styles: ['css/font-awesome.css'],
   assets: ['fonts']
-});
-
-helper.loadLibrary('node_modules/jquery/dist', {
-  scripts: ['jquery.js'],
-  styles: [],
-  assets: []
 });
 
 helper.loadLibrary('node_modules/leaflet/dist', {

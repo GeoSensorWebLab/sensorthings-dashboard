@@ -1,35 +1,60 @@
 <div class="row card">
-  <div class="col-md-9 card-block">
-    <h1><a name="datastream-<%= obj["@iot.id"] %>"></a><%= obj.description %></h1>
-    <div id="datastream-<%= obj["@iot.id"] %>-chart" class="chart"></div>
-  </div>
+  <div class="col-sm-12">
+    <div class="row">
+      <div class="col-md-9 card-block">
+        <h1><a name="datastream-<%= obj["@iot.id"] %>"></a><%= obj.description %></h1>
+        <div id="datastream-<%= obj["@iot.id"] %>-chart" class="chart"></div>
+      </div>
 
-  <div class="col-md-3">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Stat</th>
-          <th>Value</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Last</td>
-          <td>5 ms</td>
-        </tr>
-        <tr>
-          <td>Min</td>
-          <td>4 ms</td>
-        </tr>
-        <tr>
-          <td>Max</td>
-          <td>6 ms</td>
-        </tr>
-        <tr>
-          <td>Average</td>
-          <td>5 ms</td>
-        </tr>
-      </tbody>
-    </table>
+      <div class="col-md-3">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Stat</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Last</td>
+              <td>5 ms</td>
+            </tr>
+            <tr>
+              <td>Min</td>
+              <td>4 ms</td>
+            </tr>
+            <tr>
+              <td>Max</td>
+              <td>6 ms</td>
+            </tr>
+            <tr>
+              <td>Average</td>
+              <td>5 ms</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <h3>
+          <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#details-<%= obj["@iot.id"] %>" aria-expanded="false">Details</button>
+        </h3>
+        <div class="collapse" id="details-<%= obj["@iot.id"] %>">
+          <div class="card card-block">
+            <dl>
+              <dt>Description</dt>
+              <dd><%= obj.description %></dd>
+
+              <dt>Unit Of Measurement</dt>
+              <dd><%= obj.unitOfMeasurement.name %> (<%= obj.unitOfMeasurement.symbol %>)</dd>
+            </dl>
+
+            <dt>Observation Type</dt>
+            <dd><%= obj.observationType %></dd>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
