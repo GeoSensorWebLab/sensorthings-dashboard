@@ -21,12 +21,6 @@ class Chart {
       ["%b %-d", function(d) { return d.getMonth(); }], // not Jan 1st
       ["%Y", function() { return true; }]
     ]);
-    this.chartOptions = {
-      clipEdge: false,
-      showLegend: false,
-      transitionDuration: 300,
-      useInteractiveGuideline: true
-    };
 
     this.initDraw();
   }
@@ -35,14 +29,20 @@ class Chart {
   initDraw() {
     nv.addGraph(() => {
       this.chart = nv.models.lineChart()
-      .xScale(d3.time.scale())
-      .options(this.chartOptions);
+        .xScale(d3.time.scale())
+        .clipEdge(false)
+        .noData("Retrieving data…")
+        .showLegend(false)
+        .useInteractiveGuideline(true);
 
       this.initXAxis();
       this.initYAxis();
 
       this.svgElem = d3.select(this.element_id).append('svg');
-      this.svgElem.datum([]).transition().call(this.chart);
+      this.svgElem
+        .datum([])
+        .transition()
+        .call(this.chart);
 
       this.initXAxisTicks();
       this.initTooltips();
@@ -67,35 +67,35 @@ class Chart {
 
   initXAxis() {
     this.chart.xAxis
-    .showMaxMin(true)
-    .tickFormat((d) => { return this.tickMultiFormat(new Date(d)); });
+      .showMaxMin(true)
+      .tickFormat((d) => { return this.tickMultiFormat(new Date(d)); });
   }
 
   initXAxisTicks() {
     // make our own x-axis tick marks because NVD3 doesn't provide any
     var tickY2 = this.chart.yAxis.scale().range()[1];
     var lineElems = this.svgElem.select('.nv-x.nv-axis.nvd3-svg')
-    .select('.nvd3.nv-wrap.nv-axis')
-    .select('g')
-    .selectAll('.tick')
-    .data(this.chart.xScale().ticks())
-    .append('line')
-    .attr('class', 'x-axis-tick-mark')
-    .attr('x2', 0)
-    .attr('y1', tickY2 + 4)
-    .attr('y2', tickY2)
-    .attr('stroke-width', 1);
+      .select('.nvd3.nv-wrap.nv-axis')
+      .select('g')
+      .selectAll('.tick')
+      .data(this.chart.xScale().ticks())
+      .append('line')
+      .attr('class', 'x-axis-tick-mark')
+      .attr('x2', 0)
+      .attr('y1', tickY2 + 4)
+      .attr('y2', tickY2)
+      .attr('stroke-width', 1);
   }
 
   initYAxis() {
     this.chart.yAxis
-    .axisLabel(this.uom.name || "Unknown")
-    .tickFormat((d) => {
-      if (d === null) {
-        return 'N/A';
-      }
-      return d3.format(',.2f')(d) + " " + this.uom.symbol;
-    });
+      .axisLabel(this.uom.name || "Unknown")
+      .tickFormat((d) => {
+        if (d === null) {
+          return 'N/A';
+        }
+        return d3.format(',.2f')(d) + " " + this.uom.symbol;
+      });
   }
 
   loadData() {
@@ -103,7 +103,13 @@ class Chart {
       color: this.color
     });
 
-    this.svgElem.datum(data.series).transition().call(this.chart);
+    this.svgElem
+      .style("opacity", 0.0)
+      .datum(data.series)
+      .transition()
+      .style("opacity", 1.0)
+      .duration(500)
+      .call(this.chart);
   }
 }
 
