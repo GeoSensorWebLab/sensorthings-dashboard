@@ -98,14 +98,14 @@ class Chart {
       });
   }
 
-  loadData() {
-    var data = new SampleData({
-      color: this.color
+  loadData(data) {
+    data.forEach((series) => {
+      series.color = this.color;
     });
 
     this.svgElem
       .style("opacity", 0.0)
-      .datum(data.series)
+      .datum(data)
       .transition()
       .style("opacity", 1.0)
       .duration(500)

@@ -6,6 +6,7 @@ import './notifier';
 import ParamsController from './params_controller';
 import SensorThings from './sensor_things/sensor_things';
 import Settings from './settings';
+import './transform_observations';
 
 window.Chart = Chart;
 window.Settings = new Settings();

@@ -151,12 +151,11 @@ html
                 }
               });
               
-              setTimeout(function() {
-                chart.loadData();
-              }, 2000);
-              
-              // Load observations data into the chart
-              //- chart.loadData(observations);
+              Q(datastream.getObservations())
+              .then(function(observations) {
+                var values = transformObservations(observations);
+                chart.loadData([{ key: "Series", values: values }]);
+              })
             });
           });
           

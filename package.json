@@ -38,6 +38,7 @@
     "font-awesome": "^4.5.0",
     "jquery": "^2.1.4",
     "leaflet": "^0.7.7",
+    "moment": "^2.13.0",
     "node-sass": "^3.2.0",
     "nvd3": "^1.8.3",
     "pluralize": "^1.2.1",
