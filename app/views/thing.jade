@@ -151,12 +151,10 @@ html
               Q(datastream.getObservations())
               .then(function(observations) {
                 var values = transformObservations(observations);
-                chart.loadData([{ key: "Series", values: values }]);
+                chart.loadData([{ key: datastream.get("description"), values: values }]);
               })
             });
           });
-          
-          
         })
         .done();
       });
