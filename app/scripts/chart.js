@@ -31,6 +31,7 @@ class Chart {
       this.chart = nv.models.lineChart()
         .xScale(d3.time.scale())
         .clipEdge(false)
+        .margin({left: 70})
         .noData("Retrieving data…")
         .showLegend(false)
         .useInteractiveGuideline(true);
@@ -90,11 +91,12 @@ class Chart {
   initYAxis() {
     this.chart.yAxis
       .axisLabel(this.uom.name || "Unknown")
+      .axisLabelDistance(10)
       .tickFormat((d) => {
         if (d === null) {
           return 'N/A';
         }
-        return d3.format(',.2f')(d) + " " + this.uom.symbol;
+        return d + " " + this.uom.symbol;
       });
   }
 
