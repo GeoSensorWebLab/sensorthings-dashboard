@@ -133,13 +133,17 @@ html
               
               // Draw an empty chart
               var id = datastream.get("@iot.id");
-              var chart = drawChart(`#datastream-${id}-chart`, {
+              var chart = new Chart(`#datastream-${id}-chart`, {
                 color: colorForId(id),
                 unitOfMeasurement: {
                   name: "Volts",
                   symbol: "V"
                 }
               });
+              
+              setTimeout(function() {
+                chart.loadData();
+              }, 2000);
               
               // Load observations data into the chart
               //- chart.loadData(observations);
