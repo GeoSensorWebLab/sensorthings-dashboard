@@ -27,10 +27,12 @@ html
           a.nav-item.nav-link(href="settings.html") Settings
 
     div#content.container
+      div.row
+        div.col-sm-12
+          h1#thing-description.page_header Loading&hellip;
+
       div.row.card
         div#thing-info.col-sm-8.card-block
-          h1.page-header Loading&hellip;
-        
           dl
             dt Description
             dd Loading&hellip;
@@ -96,6 +98,7 @@ html
           });
           var template = JST["thing-info"](properties);
           $("#thing-info").html(template);
+          $("#thing-description").html(thing.get("description"));
           
           // Load feature marker
           Q(thing.locations)
