@@ -132,14 +132,14 @@ html
           .then(function(datastreams) {
             datastreams.forEach(function(datastream) {
               // Draw template for each datastream
-              var template = JST["datastream-card"](datastream.attributes);
-              var $el = $("#datastreams").append(template);
+              var $template = $(JST["datastream-card"](datastream.attributes));
+              $("#datastreams").append($template);
               
               var sensorTemplate = JST["sensor-info"](datastream.sensor.attributes);
-              $el.find(".sensor-attributes").append(sensorTemplate);
+              $template.find(".sensor-attributes").append(sensorTemplate);
               
               var propertyTemplate = JST["observed-property-info"](datastream.observedProperty.attributes);
-              $el.find(".observed-property-attributes").append(propertyTemplate);
+              $template.find(".observed-property-attributes").append(propertyTemplate);
               
               // Draw an empty chart
               var id = datastream.get("@iot.id");
