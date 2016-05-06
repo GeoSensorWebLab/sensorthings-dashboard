@@ -83,7 +83,7 @@ html
           // Load feature markers asynchronously.
           things.forEach(function(thing) {
             Q(thing.locations)
-            .then((locations) => {
+            .then(function(locations) {
               var location = locations[0];
               if (location && location.get("location")) {
                 // Generate HTML for popup
