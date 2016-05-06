@@ -28,6 +28,18 @@ class Thing extends Generic {
 
   // * Request Handling * //
 
+  getDatastreams(options = {}) {
+    $.extend(options, this.defaultAjaxOptions);
+    options.url = this.get("Datastreams@iot.navigationLink");
+
+    return Q($.ajax(options))
+    .then((response) => {
+      return response.value.map(function(item) {
+        return new Datastream(item);
+      });
+    });
+  }
+
   getLocations(options = {}) {
     $.extend(options, this.defaultAjaxOptions);
     options.url = this.get("Locations@iot.navigationLink");

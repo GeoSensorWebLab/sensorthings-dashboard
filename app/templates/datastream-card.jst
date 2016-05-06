@@ -35,23 +35,32 @@
         </table>
       </div>
     </div>
+
     <div class="row">
       <div class="col-sm-12">
         <h3>
           <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#details-<%= obj["@iot.id"] %>" aria-expanded="false">Details</button>
         </h3>
         <div class="collapse" id="details-<%= obj["@iot.id"] %>">
-          <div class="card card-block">
-            <dl>
-              <dt>Description</dt>
-              <dd><%= obj.description %></dd>
+          <div class="row card card-block">
+            <div class="col-sm-4 datastream-attributes">
+              <dl>
+                <dt>Description</dt>
+                <dd><%= obj.description %></dd>
 
-              <dt>Unit Of Measurement</dt>
-              <dd><%= obj.unitOfMeasurement.name %> (<%= obj.unitOfMeasurement.symbol %>)</dd>
-            </dl>
+                <dt>Unit Of Measurement</dt>
+                <dd><%= obj.unitOfMeasurement.name %> (<%= obj.unitOfMeasurement.symbol %>)</dd>
 
-            <dt>Observation Type</dt>
-            <dd><%= obj.observationType %></dd>
+                <dt>Observation Type</dt>
+                <dd><%= obj.observationType %></dd>
+              </dl>
+            </div>
+
+            <div class="col-sm-4 observed-property-attributes">
+            </div>
+
+            <div class="col-sm-4 sensor-attributes">  
+            </div>
           </div>
         </div>
       </div>
