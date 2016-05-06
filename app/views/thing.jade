@@ -145,10 +145,7 @@ html
               var id = datastream.get("@iot.id");
               var chart = new Chart(`#datastream-${id}-chart`, {
                 color: colorForId(id),
-                unitOfMeasurement: {
-                  name: "Volts",
-                  symbol: "V"
-                }
+                unitOfMeasurement: datastream.get("unitOfMeasurement")
               });
               
               Q(datastream.getObservations())
