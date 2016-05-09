@@ -20,7 +20,15 @@ var ThingView = (function() {
 
   // Time Range Picker
   var dateRange = Q.defer();
+  var dateChangeFunctions = [];
+
   new TimeRangePickerView("#time-range-picker", {
+    onChange: function(startDate, endDate) {
+      dateChangeFunctions.forEach(function(fn) {
+        fn.apply(this, [startDate, endDate]);
+      });
+    },
+
     onLoad: function(startDate, endDate) {
       dateRange.resolve({ startDate: startDate, endDate: endDate });
     }
@@ -83,9 +91,15 @@ var ThingView = (function() {
         // Draw Results
         Q(dateRange.promise)
         .then((dateRange) => {
-          new ResultView(datastream, {
+          var id = datastream.get("@iot.id");
+
+          var view = new ResultView(datastream, `#datastream-${id}-card`, {
             startDate: dateRange.startDate,
             endDate: dateRange.endDate
+          });
+
+          dateChangeFunctions.push(function(startDate, endDate) {
+            view.update(startDate, endDate);
           });
         })
         .done();

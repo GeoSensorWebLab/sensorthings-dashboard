@@ -5,17 +5,20 @@ import transformObservations from '../transform_observations';
 var SensorThingsDateFormat = "YYYY-MM-DDTHH:mm:ss.SSSZ";
 
 class ResultView {
-  constructor(datastream, options = {}) {
+  constructor(datastream, elementSelector, options = {}) {
     this.datastream = datastream;
+    this.$element   = $(elementSelector);
     this.id         = datastream.get("@iot.id");
     this.startDate  = options.startDate;
     this.endDate    = options.endDate;
 
     this.baseOptions = {};
-    if (this.startDate !== undefined && this.endDate !== undefined) {
-      this.baseOptions["$filter"] = `phenomenonTime ge ${this.startDate.format(SensorThingsDateFormat)} and phenomenonTime le ${this.endDate.format(SensorThingsDateFormat)}`;
-    }
+    this.updateBaseOptions();
 
+    this.render();
+  }
+
+  render() {
     // Draw a chart for OM_Measurement only
     if (this.datastream.get("observationType") === "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement") {
       this.drawChart();
@@ -26,7 +29,7 @@ class ResultView {
 
   drawChart() {
     // Draw an empty chart
-    $(`#datastream-${this.id}-result`).addClass('chart');
+    this.$element.find(`#datastream-${this.id}-result`).addClass('chart');
     var chart = new Chart(`#datastream-${this.id}-result`, {
       color: colorForId(this.id),
       unitOfMeasurement: this.datastream.get("unitOfMeasurement")
@@ -66,6 +69,25 @@ class ResultView {
       }
     })
     .done();
+  }
+
+  // Redraw results for new time period
+  update(startDate, endDate) {
+    this.startDate = startDate;
+    this.endDate   = endDate;
+    this.updateBaseOptions();
+    this.$element.find(`#datastream-${this.id}-result`).empty();
+
+    this.render();
+  }
+
+  // Add $filter to options, if time period is available
+  updateBaseOptions() {
+    if (this.startDate !== undefined && this.endDate !== undefined) {
+      this.baseOptions["$filter"] = `phenomenonTime ge ${this.startDate.format(SensorThingsDateFormat)} and phenomenonTime le ${this.endDate.format(SensorThingsDateFormat)}`;
+    } else {
+      delete this.baseOptions["$filter"];
+    }
   }
 }
 
