@@ -39,6 +39,20 @@ helper.loadLibrary('node_modules/jquery/dist', {
   assets: []
 });
 
+helper.loadLibrary('node_modules/moment', {
+  scripts: ['moment.js'],
+  styles: [],
+  assets: [],
+  exclude: ['package.js', 'src/**/*']
+});
+
+helper.loadLibrary('node_modules/jquery-datetimepicker', {
+  scripts: ['jquery.datetimepicker.js'],
+  styles: ['jquery.datetimepicker.css'],
+  assets: [],
+  exclude: ['jquery.js']
+});
+
 helper.loadLibrary('node_modules/tether/dist', {
   scripts: ['js/tether.js'],
   styles: ['css/tether.css'],
