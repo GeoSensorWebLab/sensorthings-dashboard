@@ -2,6 +2,7 @@
 // Import other files or use Browserify require statements.
 import Chart from './chart';
 import './color_generator';
+import MapView from './views/map_view';
 import './notifier';
 import ParamsController from './params_controller';
 import SensorThings from './sensor_things/sensor_things';
@@ -12,6 +13,7 @@ import './transform_observations';
 
 window.App = {
   Views: {
+    MapView:      MapView,
     SettingsView: SettingsView,
     ThingView:    ThingView
   }
