@@ -2,7 +2,7 @@ var ThingView = (function() {
   // Update query params in URL, get SensorThings URL from query params
   // or from LocalStorage.
   App.ParamsController.activate();
-  var ST = new SensorThings(App.ParamsController.get("stURL"));
+  var ST = new App.SensorThings(App.ParamsController.get("stURL"));
 
   var Thing = ST.getThing(App.ParamsController.get("id"), {
     data: {
@@ -106,7 +106,7 @@ var ThingView = (function() {
         } else {
           // Draw an empty chart
           $(`#datastream-${id}-result`).addClass('chart');
-          var chart = new Chart(`#datastream-${id}-result`, {
+          var chart = new App.Chart(`#datastream-${id}-result`, {
             color: colorForId(id),
             unitOfMeasurement: datastream.get("unitOfMeasurement")
           });

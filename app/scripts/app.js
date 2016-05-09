@@ -14,7 +14,9 @@ import './transform_observations';
 var settings = new Settings();
 
 window.App = {
+  Chart: Chart,
   ParamsController: new ParamsController({ settings: settings }),
+  SensorThings: SensorThings,
   Settings: settings,
   Views: {
     MapView:      MapView,
@@ -22,6 +24,3 @@ window.App = {
     ThingView:    ThingView
   }
 };
-
-window.Chart = Chart;
-window.SensorThings = SensorThings;

@@ -2,7 +2,7 @@ var MapView = (function() {
   // Update query params in URL, get SensorThings URL from query params
   // or from LocalStorage.
   App.ParamsController.activate();
-  var ST = new SensorThings(App.ParamsController.get("stURL"));
+  var ST = new App.SensorThings(App.ParamsController.get("stURL"));
 
   // Things
   var Things = ST.getThings({
