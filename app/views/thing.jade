@@ -13,18 +13,7 @@ html
 
   body
     nav.navbar.navbar-full.navbar-dark.bg-inverse
-      button.navbar-toggler.hidden-sm-up(type="button", data-toggle="collapse", data-target="#navbar", aria-expanded="false", aria-controls="navbar")
-        span.sr-only Toggle Navigation
-        span.icon-bar
-        span.icon-bar
-        span.icon-bar
-      
-      a.navbar-brand(href="index.html") LOGO
-      
-      div#navbar
-        nav.nav.navbar-nav.pull-right
-          a.nav-item.nav-link(href="map.html") Map
-          a.nav-item.nav-link(href="settings.html") Settings
+      include ./app/views/includes/navbar.jade
 
     div#content.container
       div.row
