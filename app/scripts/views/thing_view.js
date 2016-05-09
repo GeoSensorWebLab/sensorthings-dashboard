@@ -1,10 +1,10 @@
 var ThingView = (function() {
   // Update query params in URL, get SensorThings URL from query params
   // or from LocalStorage.
-  ParamsController.activate();
-  var ST = new SensorThings(ParamsController.get("stURL"));
+  App.ParamsController.activate();
+  var ST = new SensorThings(App.ParamsController.get("stURL"));
 
-  var Thing = ST.getThing(ParamsController.get("id"), {
+  var Thing = ST.getThing(App.ParamsController.get("id"), {
     data: {
       "$expand": "Locations"
     }
@@ -45,7 +45,7 @@ var ThingView = (function() {
       if (location && location.get("location")) {
         // Generate HTML for popup
         var properties = $.extend({}, thing.attributes, {
-          stURL: encodeURIComponent(ParamsController.get("stURL"))
+          stURL: encodeURIComponent(App.ParamsController.get("stURL"))
         });
         var template = JST["marker-popup"](properties);
 

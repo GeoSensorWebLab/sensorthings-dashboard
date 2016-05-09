@@ -11,8 +11,11 @@ import SettingsView from './views/settings_view';
 import ThingView from './views/thing_view';
 import './transform_observations';
 
+var settings = new Settings();
+
 window.App = {
-  Settings: new Settings(),
+  ParamsController: new ParamsController({ settings: settings }),
+  Settings: settings,
   Views: {
     MapView:      MapView,
     SettingsView: SettingsView,
@@ -21,5 +24,4 @@ window.App = {
 };
 
 window.Chart = Chart;
-window.ParamsController = new ParamsController({ settings: App.Settings });
 window.SensorThings = SensorThings;

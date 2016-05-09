@@ -1,8 +1,8 @@
 var MapView = (function() {
   // Update query params in URL, get SensorThings URL from query params
   // or from LocalStorage.
-  ParamsController.activate();
-  var ST = new SensorThings(ParamsController.get("stURL"));
+  App.ParamsController.activate();
+  var ST = new SensorThings(App.ParamsController.get("stURL"));
 
   // Things
   var Things = ST.getThings({
@@ -28,7 +28,7 @@ var MapView = (function() {
     things.forEach(function(thing) {
       var properties = $.extend({}, thing.attributes, {
         datastreamsCount: thing.datastreams.length,
-        stURL: encodeURIComponent(ParamsController.get("stURL")),
+        stURL: encodeURIComponent(App.ParamsController.get("stURL")),
         pluralize: pluralize
       });
       var template = JST["thing-list-item"](properties);
@@ -43,7 +43,7 @@ var MapView = (function() {
         if (location && location.get("location")) {
           // Generate HTML for popup
           var properties = $.extend({}, thing.attributes, {
-            stURL: encodeURIComponent(ParamsController.get("stURL"))
+            stURL: encodeURIComponent(App.ParamsController.get("stURL"))
           });
           var template = JST["marker-popup"](properties);
 
