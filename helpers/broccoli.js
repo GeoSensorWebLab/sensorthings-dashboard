@@ -41,13 +41,16 @@ var BroccoliHelper = {
   // `styles` is a list of CSS files inside `path` you want to import, in order.
   // `assets` is a list of directories inside `path` that you want to have
   // copied into the output directory.
+  // `exclude` is a list of files to specifically exclude. Useful for when two
+  // libraries include the same-named files.
   loadLibrary(path, options) {
     var lib = funnel(path, {
       include: [
         "**/*.css",
         "**/*.js",
         "**/*.map"
-      ]
+      ],
+      exclude: options.exclude || []
     });
     libraryTree = mergeTrees([libraryTree, lib]);
     scripts     = scripts.concat(options.scripts);
