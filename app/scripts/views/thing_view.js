@@ -19,7 +19,12 @@ var ThingView = (function() {
   MapManager.map.setView([51.049, -114.08], 13);
 
   // Time Range Picker
-  new TimeRangePickerView("#time-range-picker");
+  var dateRange = Q.defer();
+  new TimeRangePickerView("#time-range-picker", {
+    onLoad: function(startDate, endDate) {
+      dateRange.resolve({ startDate: startDate, endDate: endDate });
+    }
+  });
 
   // Data Load Handler
   Q(Thing).then(function(thing) {
@@ -76,7 +81,14 @@ var ThingView = (function() {
         $template.find(".observed-property-attributes").append(propertyTemplate);
 
         // Draw Results
-        new ResultView(datastream);
+        Q(dateRange.promise)
+        .then((dateRange) => {
+          new ResultView(datastream, {
+            startDate: dateRange.startDate,
+            endDate: dateRange.endDate
+          });
+        })
+        .done();
       });
     });
   })
