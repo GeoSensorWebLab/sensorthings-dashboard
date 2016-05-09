@@ -1,5 +1,6 @@
 import ResultView from './result_view';
 import StaticMap from '../maps/static_map';
+import TimeRangePickerView from './time_range_picker_view';
 
 var ThingView = (function() {
   // Update query params in URL, get SensorThings URL from query params
@@ -18,10 +19,7 @@ var ThingView = (function() {
   MapManager.map.setView([51.049, -114.08], 13);
 
   // Time Range Picker
-  {
-    var $template = JST["time-range-picker"]();
-    $("#time-range-picker").html($template);
-  }
+  new TimeRangePickerView("#time-range-picker");
 
   // Data Load Handler
   Q(Thing).then(function(thing) {
