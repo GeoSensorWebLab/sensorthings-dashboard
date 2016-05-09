@@ -3,13 +3,17 @@ var ISODateFormat = 'YYYY-MM-DD[T]HH:mm:ssZ';
 // Draw a time range picker in an HTML element.
 // Will auto-render. Uses moment-fork of JQuery DateTimePicker.
 // `elementSelector` - CSS selector for the container element
-// `onChange` - function callback triggered when time range is changed and
-//              applied
+// `options.onChange` - function callback triggered when time range is changed
+//                      and applied. Args are function(startDate, endDate)
+// `options.onLoad` - function callback triggered when rendered. Args are
+//                    function(startDate, endDate)
 // `options.startDate` - moment date for the start date
 // `options.endDate` - moment date for the end date
 class TimeRangePickerView {
-  constructor(elementSelector, onChange = function() {}, options = {}) {
+  constructor(elementSelector, options = {}) {
     this.$el = $(elementSelector);
+    this.onChange  = options.onChange || function() {};
+    this.onLoad    = options.onLoad || function() {};
     this.startDate = options.startDate || moment().subtract(12, 'hours');
     this.endDate   = options.endDate || moment();
 
@@ -25,6 +29,8 @@ class TimeRangePickerView {
 
     this.$el.find('.start-date-control').val(this.startDate.format(ISODateFormat));
     this.$el.find('.end-date-control').val(this.endDate.format(ISODateFormat));
+
+    this.onLoad(this.startDate, this.endDate);
 
     // Apply custom datetime picker for clients who do not render their own
     if (this.$el.find('[type="datetime"]').prop('type') !== 'datetime') {
