@@ -156,6 +156,9 @@ html
                   }
                 }))
                 .then(function(observations) {
+                  $(`#datastream-${id}-card .observations-count`)
+                  .html(`<p>${observations.length} ${pluralize('Observation', observations.length)}</p>`);
+                  
                   var $template = $(JST["observation-preview"](observations[0].attributes));
                   $(`#datastream-${id}-result`).html($template);
                 })
@@ -172,6 +175,9 @@ html
                 
                 Q(datastream.getObservations())
                 .then(function(observations) {
+                  $(`#datastream-${id}-card .observations-count`)
+                  .html(`<p>${observations.length} ${pluralize('Observation', observations.length)}</p>`);
+                  
                   var values = transformObservations(observations);
                   chart.loadData([{ key: datastream.get("description"), values: values }]);
                 })
