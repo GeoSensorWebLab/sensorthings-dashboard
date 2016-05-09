@@ -16,7 +16,6 @@ var MapView = (function() {
   // Map
 
   var MapManager = new BaseMap('map');
-
   MapManager.map.setView([51.049, -114.08], 8);
 
   // Data Load Handler

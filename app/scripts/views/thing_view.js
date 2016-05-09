@@ -1,4 +1,4 @@
-import BaseMap from '../maps/base_map';
+import StaticMap from '../maps/static_map';
 
 var ThingView = (function() {
   // Update query params in URL, get SensorThings URL from query params
@@ -13,17 +13,7 @@ var ThingView = (function() {
   });
 
   // Map
-
-  var MapManager = new BaseMap('map', {
-    dragging: false,
-    touchZoom: false,
-    scrollWheelZoom: false,
-    doubleClickZoom: false,
-    boxZoom: false,
-    keyboard: false,
-    zoomControl: false
-  });
-
+  var MapManager = new StaticMap('map');
   MapManager.map.setView([51.049, -114.08], 13);
 
   // Data Load Handler
