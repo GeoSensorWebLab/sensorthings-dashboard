@@ -6,12 +6,14 @@ import './notifier';
 import ParamsController from './params_controller';
 import SensorThings from './sensor_things/sensor_things';
 import Settings from './settings';
+import SettingsView from './views/settings_view';
 import ThingView from './views/thing_view';
 import './transform_observations';
 
 window.App = {
   Views: {
-    ThingView: ThingView
+    SettingsView: SettingsView,
+    ThingView:    ThingView
   }
 };
 
