@@ -6,7 +6,6 @@ var babel           = require('broccoli-babel-transpiler');
 var browserify      = require('broccoli-browserify');
 var concat          = require('broccoli-concat');
 var compileSass     = require('broccoli-sass');
-var funnel          = require('broccoli-funnel');
 var gzip            = require('broccoli-gzip');
 var helper          = require('./helpers/broccoli');
 var jade            = require('broccoli-jade');
