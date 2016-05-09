@@ -35,7 +35,7 @@ class ResultView {
       unitOfMeasurement: this.datastream.get("unitOfMeasurement")
     });
 
-    Q(this.datastream.getObservations({
+    Q(this.datastream.getAllObservations({
       data: this.baseOptions
     }))
     .then((observations) => {

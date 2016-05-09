@@ -25,6 +25,34 @@ class Datastream extends Generic {
 
   // * Request Handling * //
 
+  // Return all observations until nextLink is not defined.
+  getAllObservations(options = {}) {
+    var opts = {
+      url: this.get("Observations@iot.navigationLink")
+    };
+    $.extend(opts, this.defaultAjaxOptions, options);
+
+    var observations = [];
+
+    return Q($.ajax(opts))
+    .then((response) => {
+      response.value.forEach(function(item) {
+        observations.push(new Observation(item));
+      });
+
+      if (response["@iot.nextLink"] === undefined) {
+        return observations;
+      } else {
+        opts.url = response["@iot.nextLink"];
+
+        return Q(this.getAllObservations(opts))
+        .then(function(newObservations) {
+          return observations.concat(newObservations);
+        });
+      }
+    });
+  }
+
   getObservations(options = {}) {
     $.extend(options, this.defaultAjaxOptions);
     options.url = this.get("Observations@iot.navigationLink");
