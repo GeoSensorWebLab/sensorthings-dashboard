@@ -6,7 +6,7 @@ import './notifier';
 import ParamsController from './params_controller';
 import SensorThings from './sensor_things/sensor_things';
 import Settings from './settings';
-import ThingView from './thing_view';
+import ThingView from './views/thing_view';
 import './transform_observations';
 
 window.App = {
