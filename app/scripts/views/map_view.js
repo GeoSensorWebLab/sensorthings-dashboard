@@ -1,3 +1,5 @@
+import BaseMap from '../maps/base_map';
+
 var MapView = (function() {
   // Update query params in URL, get SensorThings URL from query params
   // or from LocalStorage.
@@ -13,13 +15,9 @@ var MapView = (function() {
 
   // Map
 
-  L.Icon.Default.imagePath = "/images";
+  var MapManager = new BaseMap('map');
 
-  var map = L.map('map').setView([51.049, -114.08], 8);
-
-  L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-  }).addTo(map);
+  MapManager.map.setView([51.049, -114.08], 8);
 
   // Data Load Handler
   Q(Things).then(function(things) {
@@ -56,7 +54,7 @@ var MapView = (function() {
 
           var feature = L.geoJson(location.get("location"), {
             pointToLayer: createMarker
-          }).addTo(map);
+          }).addTo(MapManager.map);
           thing.set("mapFeature", feature);
         }
       });

@@ -1,3 +1,5 @@
+import BaseMap from '../maps/base_map';
+
 var ThingView = (function() {
   // Update query params in URL, get SensorThings URL from query params
   // or from LocalStorage.
@@ -12,9 +14,7 @@ var ThingView = (function() {
 
   // Map
 
-  L.Icon.Default.imagePath = "/images";
-
-  var map = L.map('map', {
+  var MapManager = new BaseMap('map', {
     dragging: false,
     touchZoom: false,
     scrollWheelZoom: false,
@@ -22,11 +22,9 @@ var ThingView = (function() {
     boxZoom: false,
     keyboard: false,
     zoomControl: false
-  }).setView([51.049, -114.08], 13);
+  });
 
-  L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-  }).addTo(map);
+  MapManager.map.setView([51.049, -114.08], 13);
 
   // Data Load Handler
   Q(Thing).then(function(thing) {
@@ -58,9 +56,9 @@ var ThingView = (function() {
 
         var feature = L.geoJson(location.get("location"), {
           pointToLayer: createMarker
-        }).addTo(map);
+        }).addTo(MapManager.map);
         thing.set("mapFeature", feature);
-        map.fitBounds(feature.getBounds());
+        MapManager.map.fitBounds(feature.getBounds());
       }
     });
 
