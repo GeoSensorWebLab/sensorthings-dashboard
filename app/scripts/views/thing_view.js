@@ -17,6 +17,12 @@ var ThingView = (function() {
   var MapManager = new StaticMap('map');
   MapManager.map.setView([51.049, -114.08], 13);
 
+  // Time Range Picker
+  {
+    var $template = JST["time-range-picker"]();
+    $("#time-range-picker").html($template);
+  }
+
   // Data Load Handler
   Q(Thing).then(function(thing) {
     // Load Metadata
