@@ -16,6 +16,8 @@ function hashFnv32a(str, asString, seed) {
 
 // return a deterministic line color for a given number.
 // This causes each datastream to always receive the same line colour.
-window.colorForId = function(id) {
+var colorForId = function(id) {
   return hashFnv32a(id.toString(), true).substr(2, 8);
 };
+
+export default colorForId;

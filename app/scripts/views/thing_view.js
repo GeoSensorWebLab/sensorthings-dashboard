@@ -1,3 +1,4 @@
+import ResultView from './result_view';
 import StaticMap from '../maps/static_map';
 
 var ThingView = (function() {
@@ -60,8 +61,6 @@ var ThingView = (function() {
     }))
     .then(function(datastreams) {
       datastreams.forEach(function(datastream) {
-        var id = datastream.get("@iot.id");
-
         // Draw template for each datastream
         var $template = $(JST["datastream-card"](datastream.attributes));
         $("#datastreams").append($template);
@@ -72,43 +71,8 @@ var ThingView = (function() {
         var propertyTemplate = JST["observed-property-info"](datastream.observedProperty.attributes);
         $template.find(".observed-property-attributes").append(propertyTemplate);
 
-        // Draw a chart for OM_Measurement only
-        if (datastream.get("observationType") !== "http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement") {
-          $(`#datastream-${id}-result`).html("Loading results…");
-
-          Q(datastream.getObservations({
-            data: {
-              "$orderby": "phenomenonTime desc",
-              "$top": 1
-            }
-          }))
-          .then(function(observations) {
-            $(`#datastream-${id}-card .observations-count`)
-            .html(`<p>${observations.length} ${pluralize('Observation', observations.length)}</p>`);
-
-            var $template = $(JST["observation-preview"](observations[0].attributes));
-            $(`#datastream-${id}-result`).html($template);
-          })
-          .done();
-
-        } else {
-          // Draw an empty chart
-          $(`#datastream-${id}-result`).addClass('chart');
-          var chart = new App.Chart(`#datastream-${id}-result`, {
-            color: colorForId(id),
-            unitOfMeasurement: datastream.get("unitOfMeasurement")
-          });
-
-          Q(datastream.getObservations())
-          .then(function(observations) {
-            $(`#datastream-${id}-card .observations-count`)
-            .html(`<p>${observations.length} ${pluralize('Observation', observations.length)}</p>`);
-
-            var values = transformObservations(observations);
-            chart.loadData([{ key: datastream.get("description"), values: values }]);
-          })
-          .done();
-        }
+        // Draw Results
+        new ResultView(datastream);
       });
     });
   })
