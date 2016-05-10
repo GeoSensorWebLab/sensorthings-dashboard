@@ -39,7 +39,7 @@ class C3Chart {
       data: {
         x: 'x',
         colors: {
-          'data': this.color
+          'result': `#${this.color}`
         },
         columns: [
         ]
@@ -54,13 +54,13 @@ class C3Chart {
   loadData(observations) {
     if (this.chart) {
       var x = ['x'];
-      var y = ['data'];
+      var y = ['result'];
       x = x.concat(this.getObservationsX(observations));
       y = y.concat(this.getObservationsY(observations));
 
       this.chart.load({
         columns: [x,y],
-        unload: ['data']
+        unload: ['result']
       });
     }
   }
