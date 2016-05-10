@@ -1,6 +1,6 @@
 # How to Contribute
 
-You can help this project by sending feature requests, bug reports, patches, or merge requests.
+You can help this project by sending feature requests, bug reports, patches, or merge requests. All communication and contributions are expected to follow our project's [Code of Conduct](CODE_OF_CONDUCT.markdown).
 
 Our [Issue Tracker][Issue Tracker] is currently private to our development team.
 
