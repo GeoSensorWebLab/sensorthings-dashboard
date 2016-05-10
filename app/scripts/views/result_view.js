@@ -1,5 +1,6 @@
 import Chart from '../chart';
 import colorForId from '../color_generator';
+import StatisticsView from './statistics_view';
 import transformObservations from '../transform_observations';
 
 var SensorThingsDateFormat = "YYYY-MM-DDTHH:mm:ss.SSSZ";
@@ -14,6 +15,8 @@ class ResultView {
 
     this.baseOptions = {};
     this.updateBaseOptions();
+
+    this.statisticsView = new StatisticsView(this.$element.find(".observation-statistics"));
 
     this.render();
   }
@@ -44,6 +47,9 @@ class ResultView {
 
       var values = transformObservations(observations);
       chart.loadData([{ key: this.datastream.get("description"), values: values }]);
+
+      // Update statistics. Use slice to clone array.
+      this.statisticsView.update(observations.slice(0));
     })
     .done();
   }
@@ -67,6 +73,9 @@ class ResultView {
       } else {
         $(`#datastream-${this.id}-result`).html("No Results in Time Range");
       }
+
+      // Update statistics. Use slice to clone array.
+      this.statisticsView.update(observations.slice(0));
     })
     .done();
   }
