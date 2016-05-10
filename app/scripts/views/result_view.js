@@ -87,6 +87,7 @@ class ResultView {
     this.updateBaseOptions();
     this.$element.find(`#datastream-${this.id}-result`).empty();
     this.$element.find(`.observations-count`).html("");
+    this.statisticsView.update([]);
 
     this.render();
   }
