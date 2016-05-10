@@ -1,4 +1,6 @@
+import Notifier from '../notifier';
 var ISODateFormat = 'YYYY-MM-DD[T]HH:mm:ssZ';
+var moment = require('moment');
 
 // Draw a time range picker in an HTML element.
 // Will auto-render. Uses moment-fork of JQuery DateTimePicker.
@@ -18,6 +20,7 @@ class TimeRangePickerView {
     this.endDate   = options.endDate || moment();
 
     this.render();
+    this.notifier  = new Notifier(".notifier");
   }
 
   render() {
@@ -47,15 +50,26 @@ class TimeRangePickerView {
     });
 
     $("button.apply-time-range").on("click", () => {
-      // TODO: Add date validation check
-      this.startDate = moment(this.$el.find('.start-date-control').val());
-      this.endDate   = moment(this.$el.find('.end-date-control').val());
-      $(".time-range-picker-controls").hide();
+      this.notifier.clear();
+      var newStartDate = moment(this.$el.find('.start-date-control').val());
+      var newEndDate   = moment(this.$el.find('.end-date-control').val());
 
-      this.$el.find('.start-date').text(this.startDate.local());
-      this.$el.find('.end-date').text(this.endDate.local());
+      if (!newStartDate.isValid() && !newEndDate.isValid()) {
+        this.notifier.error("Start Date and End Date both have invalid formatting.");
+      } else if (!newStartDate.isValid()) {
+        this.notifier.error("Start Date has invalid formatting.");
+      } else if (!newEndDate.isValid()) {
+        this.notifier.error("End Date has invalid formatting.");
+      } else {
+        this.startDate = newStartDate;
+        this.endDate   = newEndDate;
+        $(".time-range-picker-controls").hide();
 
-      this.onChange(this.startDate, this.endDate);
+        this.$el.find('.start-date').text(this.startDate.local());
+        this.$el.find('.end-date').text(this.endDate.local());
+
+        this.onChange(this.startDate, this.endDate);
+      }
     });
   }
 }

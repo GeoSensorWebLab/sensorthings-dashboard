@@ -4,6 +4,7 @@
 class Notifier {
   constructor(elementSelector) {
     this.$element = $(elementSelector);
+    this.clear();
   }
 
   clear() {
