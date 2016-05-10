@@ -45,11 +45,16 @@ class ResultView {
       $(`#datastream-${this.id}-card .observations-count`)
       .html(`<p>${observations.length} ${pluralize('Observation', observations.length)}</p>`);
 
-      var values = transformObservations(observations);
-      chart.loadData([{ key: this.datastream.get("description"), values: values }]);
+      if (observations.length === 0) {
+        $(`#datastream-${this.id}-result`).removeClass('chart').html("No Results in Time Range");
+        this.statisticsView.update([]);
+      } else {
+        var values = transformObservations(observations);
+        chart.loadData([{ key: this.datastream.get("description"), values: values }]);
 
-      // Update statistics. Use slice to clone array.
-      this.statisticsView.update(observations.slice(0));
+        // Update statistics. Use slice to clone array.
+        this.statisticsView.update(observations.slice(0));
+      }
     })
     .done();
   }
