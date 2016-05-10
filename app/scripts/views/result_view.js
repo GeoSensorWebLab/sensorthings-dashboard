@@ -1,8 +1,6 @@
-import Chart from '../chart';
 import C3Chart from '../c3_chart';
 import colorForId from '../color_generator';
 import StatisticsView from './statistics_view';
-import transformObservations from '../transform_observations';
 
 var SensorThingsDateFormat = "YYYY-MM-DDTHH:mm:ss.SSSZ";
 

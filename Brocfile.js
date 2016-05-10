@@ -89,12 +89,6 @@ helper.loadLibrary('node_modules/leaflet/dist', {
   assets: ['images']
 });
 
-helper.loadLibrary('node_modules/nvd3/build', {
-  scripts: ['nv.d3.js'],
-  styles: ['nv.d3.css'],
-  assets: []
-});
-
 helper.loadLibrary('node_modules/q', {
   scripts: ['q.js'],
   styles: [],
