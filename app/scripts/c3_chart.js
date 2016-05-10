@@ -21,7 +21,8 @@ class C3Chart {
           label: 'date',
           type: 'timeseries',
           tick: {
-            culling: { max: 7 },
+            count: 10,
+            culling: { max: 5 },
             format: '%Y-%m-%d %H:%M:%S %Z'
           }
         },
