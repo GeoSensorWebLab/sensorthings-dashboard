@@ -1,7 +1,6 @@
 // Start with your ES5/6/7 script here.
 // Import other files or use Browserify require statements.
 import MapView from './views/map_view';
-import './notifier';
 import ParamsController from './params_controller';
 import SensorThings from './sensor_things/sensor_things';
 import Settings from './settings';

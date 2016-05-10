@@ -1,4 +1,7 @@
+import Notifier from '../notifier';
+
 var SettingsView = (function() {
+  var notifier = new Notifier("div#notify");
   $("#custom-url").val(App.Settings.getSensorThingsURL()).prop("disabled", false);
 
   $(".apply-settings").click(function() {
@@ -10,7 +13,7 @@ var SettingsView = (function() {
       App.Settings.setSensorThingsURL(selectVal);
       $("#custom-url").val(selectVal);
     }
-    Notify.success("SensorThings URL updated.");
+    notifier.success("SensorThings URL updated.");
   });
 });
 
