@@ -58,7 +58,7 @@ class ResultView {
       })
     }))
     .then((observations) => {
-      $(`#datastream-${this.id}-card .observations-count`)
+      this.$element.find(`.observations-count`)
       .html(`<p>${observations.length} ${pluralize('Observation', observations.length)}</p>`);
 
       if (observations[0]) {
@@ -77,6 +77,7 @@ class ResultView {
     this.endDate   = endDate;
     this.updateBaseOptions();
     this.$element.find(`#datastream-${this.id}-result`).empty();
+    this.$element.find(`.observations-count`).html("");
 
     this.render();
   }
