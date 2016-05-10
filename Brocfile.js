@@ -71,6 +71,12 @@ helper.loadLibrary('node_modules/d3', {
   assets: []
 });
 
+helper.loadLibrary('node_modules/c3', {
+  scripts: ['c3.js'],
+  styles: ['c3.css'],
+  assets: []
+});
+
 helper.loadLibrary('node_modules/font-awesome', {
   scripts: [],
   styles: ['css/font-awesome.css'],

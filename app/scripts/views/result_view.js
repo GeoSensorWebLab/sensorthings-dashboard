@@ -1,4 +1,5 @@
 import Chart from '../chart';
+import C3Chart from '../c3_chart';
 import colorForId from '../color_generator';
 import StatisticsView from './statistics_view';
 import transformObservations from '../transform_observations';
@@ -32,8 +33,8 @@ class ResultView {
 
   drawChart() {
     // Draw an empty chart
-    this.$element.find(`#datastream-${this.id}-result`).addClass('chart');
-    var chart = new Chart(`#datastream-${this.id}-result`, {
+    this.$element.find(`#datastream-${this.id}-result`);
+    var chart = new C3Chart(`#datastream-${this.id}-result`, {
       color: colorForId(this.id),
       unitOfMeasurement: this.datastream.get("unitOfMeasurement")
     });
@@ -46,11 +47,10 @@ class ResultView {
       .html(`<p>${observations.length} ${pluralize('Observation', observations.length)}</p>`);
 
       if (observations.length === 0) {
-        $(`#datastream-${this.id}-result`).removeClass('chart').html("No Results in Time Range");
+        $(`#datastream-${this.id}-result`).html("No Results in Time Range");
         this.statisticsView.update([]);
       } else {
-        var values = transformObservations(observations);
-        chart.loadData([{ key: this.datastream.get("description"), values: values }]);
+        chart.loadData(observations.slice(0));
 
         // Update statistics. Use slice to clone array.
         this.statisticsView.update(observations.slice(0));
