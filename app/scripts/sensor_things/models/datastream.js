@@ -3,6 +3,9 @@ import Observation from './observation';
 import ObservedProperty from './observed_property';
 import Sensor from './sensor';
 
+var $ = require('jquery');
+var Q = require('q');
+
 class Datastream extends Generic {
   constructor(data) {
     super(data);

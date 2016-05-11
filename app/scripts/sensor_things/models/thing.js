@@ -2,6 +2,9 @@ import Generic from './generic';
 import Datastream from './datastream';
 import Location from './location';
 
+var $ = require('jquery');
+var Q = require('q');
+
 class Thing extends Generic {
   constructor(data) {
     super(data);

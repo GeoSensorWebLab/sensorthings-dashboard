@@ -1,6 +1,7 @@
 import Thing from './models/thing';
 
 var $ = require('jquery');
+var Q = require('q');
 
 class SensorThings {
   constructor(url) {
