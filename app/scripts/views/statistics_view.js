@@ -1,13 +1,20 @@
+// View class for statistics table on a Datastream.
+// Call update() with an array of Observations to render statistics for that
+// set of Observations.
 class StatisticsView {
   constructor(elementSelector) {
     this.$element = $(elementSelector);
-
     this.render();
   }
 
   render() {
     var $template = $(JST["observation-statistics"]());
     this.$element.html($template);
+  }
+
+  // Sort numbers in ascending order
+  sortAscending(a, b) {
+    return a - b;
   }
 
   // Update statistics table with data from observations
@@ -24,9 +31,7 @@ class StatisticsView {
       });
 
       var last = results[0];
-      results.sort(function(a, b) {
-        return a - b;
-      });
+      results.sort(this.sortAscending);
       var min = results[0];
       var max = results[results.length - 1];
       var average = results.reduce(function(prev, current) {
@@ -37,6 +42,8 @@ class StatisticsView {
     }
   }
 
+  // Update statistics table with values.
+  // Numbers will be formatted with either toLocaleString or with toPrecision.
   updateValues(last, min, max, average) {
     var formatNumber;
     if (Number.prototype.toLocaleString !== undefined) {
