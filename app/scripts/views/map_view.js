@@ -102,16 +102,16 @@ class MapView {
     $(".show-things-list").click(function() {
       $("#things-list").toggleClass("hidden-sm-down");
       $("#map-container").toggleClass("hidden-sm-down");
-      $(".show-things-list").toggleClass("invisible");
-      $(".show-things-map").toggleClass("invisible");
+      $(".show-things-list").hide();
+      $(".show-things-map").show();
       return false;
     });
 
     $(".show-things-map").click(function() {
       $("#things-list").toggleClass("hidden-sm-down");
       $("#map-container").toggleClass("hidden-sm-down");
-      $(".show-things-list").toggleClass("invisible");
-      $(".show-things-map").toggleClass("invisible");
+      $(".show-things-list").show();
+      $(".show-things-map").hide();
       return false;
     });
   }
