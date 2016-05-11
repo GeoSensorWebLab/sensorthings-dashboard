@@ -112,6 +112,7 @@ class MapView {
       $("#map-container").toggleClass("hidden-sm-down");
       $(".show-things-list").show();
       $(".show-things-map").hide();
+      MapManager.map.invalidateSize();
       return false;
     });
   }
