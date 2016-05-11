@@ -1,10 +1,10 @@
 <li class="row list-group-item" data-id="<%= obj["@iot.id"] %>">
-  <div class="col-sm-6">
+  <div class="col-sm-8">
     <p>
       <a href="/thing.html?stURL=<%=obj.stURL %>&id=<%= obj["@iot.id"] %>"><%= obj.description %></a>
     </p>
   </div>
-  <div class="col-sm-6">
-    <p><%= obj.datastreamsCount %> <%= obj.pluralize("Stream", obj.datastreamsCount) %></p>
+  <div class="col-sm-4">
+    <p class="small"><%= obj.datastreamsCount %> <%= obj.pluralize("Stream", obj.datastreamsCount) %></p>
   </div>
 </li>
