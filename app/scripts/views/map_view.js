@@ -27,7 +27,8 @@ class MapView {
 
       // Enable marker hover highlight
       this.activateMarkerHighlighting(things);
-    });
+    })
+    .done();
 
     // Hide zoom controls for mobile — pinch zoom is more reliable there
     $(".leaflet-control-container").addClass("hidden-sm-down");
@@ -99,7 +100,8 @@ class MapView {
         }).addTo(this.MapManager.map);
         thing.set("mapFeature", feature);
       }
-    });
+    })
+    .done();
   }
 
   enableMobileSwitcher() {
