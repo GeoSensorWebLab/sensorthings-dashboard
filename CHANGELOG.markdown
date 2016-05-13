@@ -2,6 +2,21 @@
 
 A list of changes and fixes for each release.
 
+## v0.5.0 (2016-05-13)
+
+* Add Changelog, Contributor Guide, Code of Conduct
+* Converted Notifier from function to class
+* Fix styling class for Bootstrap 4 danger alert boxes
+* Add date validation warnings for Time Range Picker
+* Display a message if a datastream has no observations in the time range
+* Replace nvd3.js charts with c3.js charts to fix y-axis label fit
+* Fix padding and display of sensors list on mobile devices
+* Resized sidebar for mobile devices
+* Fix map resize when window size changes causing the map to break while the map is not visible
+* Break up view classes into more methods
+* Add require statements for SensorThings library
+* Add noscript notice to pages for browsers with JavaScript disabled
+
 ## v0.4.0 (2016-05-10)
 
 * Add count of loaded Observations in each Datastream
