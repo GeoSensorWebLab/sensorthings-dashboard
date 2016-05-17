@@ -2,9 +2,9 @@
 
 You can help this project by sending feature requests, bug reports, patches, or merge requests. All communication and contributions are expected to follow our project's [Code of Conduct](CODE_OF_CONDUCT.markdown).
 
-Our [Issue Tracker][Issue Tracker] is currently private to our development team.
+Our [Issue Tracker][Issue Tracker] is hosted on GitHub.
 
-[Issue Tracker]: https://sensorweb.atlassian.net/projects/SSD/issues
+[Issue Tracker]: https://github.com/GeoSensorWebLab/sensorthings-dashboard/issues
 
 ## Feature Requests
 
@@ -26,7 +26,7 @@ If you found an unexpected or unwanted behaviour in the dashboard, please report
 
 ## Patches/Merge Requests
 
-If you found a bug in the code and want to submit a fix or change, you can either email the patch to the development team or send a [Pull Request](https://bitbucket.org/geosensorweblab/simple-sta-dashboard/pull-requests/).
+If you found a bug in the code and want to submit a fix or change, you can either email the patch to the development team or send a [Pull Request](https://github.com/GeoSensorWebLab/sensorthings-dashboard/pulls).
 
 Note that you should contact the development team before writing the patch to confirm that nobody else is already working on it and to discuss when the patch will be released.
 
@@ -35,4 +35,5 @@ Note that you should contact the development team before writing the patch to co
 Updates to any documentation are very welcome. Please follow the Patches/Merge Requests guidelines above to submit either new documentation or changes to existing documentation. Grammar and spelling fixes are welcome, even small ones.
 
 Thanks for looking at our contribution guide!
+
 — Dev Team
