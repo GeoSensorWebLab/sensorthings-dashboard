@@ -2,6 +2,13 @@
 
 A list of changes and fixes for each release.
 
+## v0.6.0 (2016-05-20)
+
+* Update documentation for project now that it is public
+* Document production deployment options
+* Remove built-in SensorThings JS module and replace with Eclipse Whiskers client library
+* Fix ES6 polyfill via Babel
+
 ## v0.5.0 (2016-05-13)
 
 * Add Changelog, Contributor Guide, Code of Conduct
