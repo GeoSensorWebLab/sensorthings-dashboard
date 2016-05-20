@@ -25,6 +25,7 @@ scripts = browserify(scripts, {
   entries: ['./app.js'],
   outputFile: 'app.js'
 });
+scripts = babel(scripts, { browserPolyfill: true });
 
 // == Load External Libraries ==
 // Order is important. Scripts will be concatenated in this order, and
