@@ -1,6 +1,5 @@
 import Notifier from '../notifier';
 var ISODateFormat = 'YYYY-MM-DD[T]HH:mm:ssZ';
-var moment = require('moment');
 
 // Draw a time range picker in an HTML element.
 // Will auto-render. Uses moment-fork of JQuery DateTimePicker.
