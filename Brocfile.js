@@ -108,6 +108,12 @@ helper.loadLibrary('node_modules/pluralize', {
   assets: []
 });
 
+helper.loadLibrary('node_modules/highcharts', {
+  scripts: ['highstock.src.js'],
+  styles: [],
+  assets: []
+});
+
 helper.loadLibrary('vendor', {
   scripts: [],
   styles: [],

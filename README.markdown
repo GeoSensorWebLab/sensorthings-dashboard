@@ -27,7 +27,9 @@ For more information on getting started with deployment, please see the [Getting
 
 ## License
 
-Eclipse Public License Version 1.0
+This repository is licensed under the Eclipse Public License Version 1.0.
+
+The app has a dependency on the [HighCharts graphing library](http://www.highcharts.com/), which is not free for commercial and government use. Please see the [HighSoft FAQ](https://shop.highsoft.com/faq) for more information on licensing.
 
 ## Authors
 
