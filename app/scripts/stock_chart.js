@@ -17,6 +17,11 @@ class StockChart {
   render() {
     var elementID = $(this.elementSelector).attr("id");
     this.stockChart = new Highcharts.StockChart(elementID, {
+      tooltip: {
+        valueDecimals: 2,
+        valueSuffix: " " + this.uom.symbol
+      },
+
       xAxis: [{
         description: "Date and Time of Observation",
         ordinal: false,
@@ -45,7 +50,7 @@ class StockChart {
   loadData(observations) {
     var data = this.sortData(this.convertObservations(observations));
     this.stockChart.addSeries({
-      name: 'values',
+      name: 'Observations',
       data: data
     });
   }
