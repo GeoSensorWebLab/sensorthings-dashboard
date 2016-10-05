@@ -62,8 +62,10 @@ class StockChart {
   loadData(observations) {
     var data = this.sortData(this.convertObservations(observations));
     this.stockChart.addSeries({
+      color: "#" + this.color,
       name: 'Observations',
-      data: data
+      data: data,
+      type: "line"
     });
   }
 }
