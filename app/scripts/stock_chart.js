@@ -16,7 +16,13 @@ class StockChart {
   // Initialize and draw the chart
   render() {
     var elementID = $(this.elementSelector).attr("id");
-    this.stockChart = new Highcharts.StockChart(elementID, {});
+    this.stockChart = new Highcharts.StockChart(elementID, {
+      xAxis: [{
+        description: "Date and Time of Observation",
+        ordinal: false,
+        title: { text: "Phenomenon Time" }
+      }]
+    });
   }
 
   // Convert array of observations into array of [timestamp, value] pairs
