@@ -6,12 +6,11 @@ import Settings from './settings';
 import SettingsView from './views/settings_view';
 import ThingView from './views/thing_view';
 
-var SensorThings = require('eclipse-whiskers');
 var settings = new Settings();
 
 window.App = {
   ParamsController: new ParamsController({ settings: settings }),
-  SensorThings: SensorThings.Backend,
+  SensorThings: EclipseWhiskers.Backend,
   Settings: settings,
   Views: {
     MapView:      MapView,

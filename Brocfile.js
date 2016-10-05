@@ -114,6 +114,12 @@ helper.loadLibrary('node_modules/highcharts', {
   assets: []
 });
 
+helper.loadLibrary('node_modules/eclipse-whiskers', {
+  scripts: ['dist/eclipse-whiskers.js'],
+  styles: [],
+  assets: []
+});
+
 helper.loadLibrary('vendor', {
   scripts: [],
   styles: [],

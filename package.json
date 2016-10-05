@@ -35,7 +35,7 @@
     "connect-gzip-static": "^1.0.0",
     "copy-dereference": "^1.0.0",
     "d3": "^3.5.16",
-    "eclipse-whiskers": "git+https://github.com/eclipse/whiskers.git#3df4601e98b9dc4c343d20d3e40d582ff021cc40",
+    "eclipse-whiskers": "git+https://github.com/eclipse/whiskers.git#b7a8d139eebc222156ea2d59b799b93717dfc4b0",
     "express": "^4.7.2",
     "font-awesome": "^4.5.0",
     "highcharts": "^4.2.6",
