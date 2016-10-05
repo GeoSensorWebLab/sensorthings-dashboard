@@ -5,6 +5,10 @@ class StockChart {
     this.elementSelector = elementSelector;
     $(this.elementSelector).addClass('chart');
 
+    this.observedProperty = options.observedProperty.attributes || {
+      name: "Unknown"
+    };
+
     this.uom = options.unitOfMeasurement || {
       name: "Unknown",
       symbol: ""
@@ -26,6 +30,14 @@ class StockChart {
         description: "Date and Time of Observation",
         ordinal: false,
         title: { text: "Phenomenon Time" }
+      }],
+
+      yAxis: [{
+        description: "Result value for Observations",
+        labels: {
+          format: "{value} " + this.uom.symbol
+        },
+        title: { text: this.observedProperty.name }
       }]
     });
   }

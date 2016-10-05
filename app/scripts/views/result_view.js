@@ -34,6 +34,7 @@ class ResultView {
     this.$element.find(`#datastream-${this.id}-result`);
     var chart = new Chart(`#datastream-${this.id}-result`, {
       color: colorForId(this.id),
+      observedProperty: this.datastream.observedProperty,
       unitOfMeasurement: this.datastream.get("unitOfMeasurement")
     });
 
