@@ -10,11 +10,11 @@ class C3Chart {
       symbol: ""
     };
 
-    this.initDraw();
+    this.render();
   }
 
   // Initialize and draw the chart
-  initDraw() {
+  render() {
     this.chart = c3.generate({
       axis: {
         x: {
