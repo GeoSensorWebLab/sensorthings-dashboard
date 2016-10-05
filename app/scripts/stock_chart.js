@@ -1,6 +1,6 @@
 class StockChart {
   constructor(elementSelector, options = {}) {
-    this.chart = null;
+    this.stockChart = null;
     this.color = options.color;
     this.elementSelector = elementSelector;
     $(this.elementSelector).addClass('chart');
@@ -15,21 +15,30 @@ class StockChart {
 
   // Initialize and draw the chart
   render() {
-    this.chart = $(this.elementSelector).highcharts("StockChart", {
+    var elementID = $(this.elementSelector).attr("id");
+    this.stockChart = new Highcharts.StockChart(elementID, {});
+  }
+
+  // Convert array of observations into array of [timestamp, value] pairs
+  convertObservations(observations) {
+    return $.map(observations, function(item) {
+      return [[
+        moment(item.attributes.phenomenonTime).valueOf(),
+        parseFloat(item.attributes.result)
+      ]];
     });
   }
 
-  // Convert array of observations into array of [time, value] pairs
-  convertObservations(observations) {
-    return $.map(observations, function(item) {
-      return [item.attributes.phenomenonTime, item.attributes.result];
+  // Sort array of [timestamp, value] pairs by timestamp
+  sortData(data) {
+    return data.sort(function(a, b) {
+      return a[0] - b[0];
     });
   }
 
   loadData(observations) {
-    var data = this.convertObservations(observations);
-    console.log("howdy");
-    this.chart.addSeries({
+    var data = this.sortData(this.convertObservations(observations));
+    this.stockChart.addSeries({
       name: 'values',
       data: data
     });
