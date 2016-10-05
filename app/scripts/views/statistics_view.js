@@ -28,6 +28,8 @@ class StatisticsView {
     } else {
       var results = observations.map(function(observation) {
         return parseFloat(observation.get("result"));
+      }).filter(function(result) {
+        return (result !== undefined && !isNaN(result));
       });
 
       var last = results[0];
