@@ -35,7 +35,7 @@ class TimeRangePickerView {
 
     this.onLoad(this.startDate, this.endDate);
 
-    // Apply custom datetime picker for clients who do not render their own
+    // Apply custom datetime picker for browsers who do not render their own
     if (this.$('[type="datetime"]').prop('type') !== 'datetime') {
       this.$('[type="datetime"]').datetimepicker({
         format: ISODateFormat,
@@ -51,34 +51,22 @@ class TimeRangePickerView {
 
     this.$("button.set-past-hour").on("click", () => {
       this.notifier.clear();
-      var newStartDate = moment().subtract(1, 'hours');
-      var newEndDate   = moment();
-
-      this.applyTimeRange(newStartDate, newEndDate);
+      this.applyTimeRange(moment().subtract(1, 'hours'), moment());
     });
 
     this.$("button.set-past-day").on("click", () => {
       this.notifier.clear();
-      var newStartDate = moment().subtract(1, 'days');
-      var newEndDate   = moment();
-
-      this.applyTimeRange(newStartDate, newEndDate);
+      this.applyTimeRange(moment().subtract(1, 'days'), moment());
     });
 
     this.$("button.set-past-week").on("click", () => {
       this.notifier.clear();
-      var newStartDate = moment().subtract(1, 'weeks');
-      var newEndDate   = moment();
-
-      this.applyTimeRange(newStartDate, newEndDate);
+      this.applyTimeRange(moment().subtract(1, 'weeks'), moment());
     });
 
     this.$("button.set-past-month").on("click", () => {
       this.notifier.clear();
-      var newStartDate = moment().subtract(1, 'months');
-      var newEndDate   = moment();
-
-      this.applyTimeRange(newStartDate, newEndDate);
+      this.applyTimeRange(moment().subtract(1, 'months'), moment());
     });
 
     this.$("button.apply-time-range").on("click", () => {
@@ -90,6 +78,8 @@ class TimeRangePickerView {
     });
   }
 
+  // Check newStartDate and newEndDate for validity, then update the UI and
+  // trigger the callback for a new time range.
   applyTimeRange(newStartDate, newEndDate) {
     if (!newStartDate.isValid() && !newEndDate.isValid()) {
       this.notifier.error("Start Date and End Date both have invalid formatting.");
