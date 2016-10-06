@@ -13,6 +13,7 @@ var ISODateFormat = 'YYYY-MM-DD[T]HH:mm:ssZ';
 class TimeRangePickerView {
   constructor(elementSelector, options = {}) {
     this.$el = $(elementSelector);
+    this.$   = function() { return this.$el.find.apply(this.$el, arguments); }
     this.onChange  = options.onChange || function() {};
     this.onLoad    = options.onLoad || function() {};
     this.startDate = options.startDate || moment().subtract(12, 'hours');
@@ -26,17 +27,17 @@ class TimeRangePickerView {
     var $template = JST["time-range-picker"]();
     this.$el.html($template);
 
-    this.$el.find('.start-date').text(this.startDate.local());
-    this.$el.find('.end-date').text(this.endDate.local());
+    this.$('.start-date').text(this.startDate.local());
+    this.$('.end-date').text(this.endDate.local());
 
-    this.$el.find('.start-date-control').val(this.startDate.format(ISODateFormat));
-    this.$el.find('.end-date-control').val(this.endDate.format(ISODateFormat));
+    this.$('.start-date-control').val(this.startDate.format(ISODateFormat));
+    this.$('.end-date-control').val(this.endDate.format(ISODateFormat));
 
     this.onLoad(this.startDate, this.endDate);
 
     // Apply custom datetime picker for clients who do not render their own
-    if (this.$el.find('[type="datetime"]').prop('type') !== 'datetime') {
-      this.$el.find('[type="datetime"]').datetimepicker({
+    if (this.$('[type="datetime"]').prop('type') !== 'datetime') {
+      this.$('[type="datetime"]').datetimepicker({
         format: ISODateFormat,
         formatTime: 'HH:mm',
         formatDate: 'YYYY-MM-DD',
@@ -44,32 +45,68 @@ class TimeRangePickerView {
       });
     }
 
-    $(".start-date, .end-date").on("click", () => {
-      $(".time-range-picker-controls").show();
+    this.$(".start-date, .end-date").on("click", () => {
+      this.$(".time-range-picker-controls").show();
     });
 
-    $("button.apply-time-range").on("click", () => {
+    this.$("button.set-past-hour").on("click", () => {
       this.notifier.clear();
-      var newStartDate = moment(this.$el.find('.start-date-control').val());
-      var newEndDate   = moment(this.$el.find('.end-date-control').val());
+      var newStartDate = moment().subtract(1, 'hours');
+      var newEndDate   = moment();
 
-      if (!newStartDate.isValid() && !newEndDate.isValid()) {
-        this.notifier.error("Start Date and End Date both have invalid formatting.");
-      } else if (!newStartDate.isValid()) {
-        this.notifier.error("Start Date has invalid formatting.");
-      } else if (!newEndDate.isValid()) {
-        this.notifier.error("End Date has invalid formatting.");
-      } else {
-        this.startDate = newStartDate;
-        this.endDate   = newEndDate;
-        $(".time-range-picker-controls").hide();
-
-        this.$el.find('.start-date').text(this.startDate.local());
-        this.$el.find('.end-date').text(this.endDate.local());
-
-        this.onChange(this.startDate, this.endDate);
-      }
+      this.applyTimeRange(newStartDate, newEndDate);
     });
+
+    this.$("button.set-past-day").on("click", () => {
+      this.notifier.clear();
+      var newStartDate = moment().subtract(1, 'days');
+      var newEndDate   = moment();
+
+      this.applyTimeRange(newStartDate, newEndDate);
+    });
+
+    this.$("button.set-past-week").on("click", () => {
+      this.notifier.clear();
+      var newStartDate = moment().subtract(1, 'weeks');
+      var newEndDate   = moment();
+
+      this.applyTimeRange(newStartDate, newEndDate);
+    });
+
+    this.$("button.set-past-month").on("click", () => {
+      this.notifier.clear();
+      var newStartDate = moment().subtract(1, 'months');
+      var newEndDate   = moment();
+
+      this.applyTimeRange(newStartDate, newEndDate);
+    });
+
+    this.$("button.apply-time-range").on("click", () => {
+      this.notifier.clear();
+      var newStartDate = moment(this.$('.start-date-control').val());
+      var newEndDate   = moment(this.$('.end-date-control').val());
+
+      this.applyTimeRange(newStartDate, newEndDate);
+    });
+  }
+
+  applyTimeRange(newStartDate, newEndDate) {
+    if (!newStartDate.isValid() && !newEndDate.isValid()) {
+      this.notifier.error("Start Date and End Date both have invalid formatting.");
+    } else if (!newStartDate.isValid()) {
+      this.notifier.error("Start Date has invalid formatting.");
+    } else if (!newEndDate.isValid()) {
+      this.notifier.error("End Date has invalid formatting.");
+    } else {
+      this.startDate = newStartDate;
+      this.endDate   = newEndDate;
+      this.$(".time-range-picker-controls").hide();
+
+      this.$('.start-date').text(this.startDate.local());
+      this.$('.end-date').text(this.endDate.local());
+
+      this.onChange(this.startDate, this.endDate);
+    }
   }
 }
 
