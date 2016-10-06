@@ -1,9 +1,12 @@
 <div id="datastream-<%= obj["@iot.id"] %>-card" class="row card">
   <div class="col-sm-12">
     <div class="row">
-      <div class="col-md-12 card-block">
+      <div class="col-md-10 card-block">
         <h2><a name="datastream-<%= obj["@iot.id"] %>"></a><%= obj.description %></h2>
         <div class="observations-count">Loading Observations&hellip;</div>
+      </div>
+      <div class="col-md-2 card-block">
+        <h5 class="pull-right"><a href="<%= obj["@iot.selfLink"] %>">API Link</a></h5>
       </div>
     </div>
     <div class="row">

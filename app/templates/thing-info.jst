@@ -1,14 +1,21 @@
-<dl>
-  <dt>ID</dt>
-  <dd><%= obj["@iot.id"] %></dd>
+<div class="row">
+  <div class="col-md-10">
+    <dl>
+      <dt>ID</dt>
+      <dd><%= obj["@iot.id"] %></dd>
 
-  <dt>Location Description</dt>
-  <dd><%= obj.locationDescription %></dd>
+      <dt>Location Description</dt>
+      <dd><%= obj.locationDescription %></dd>
 
-  <dt>Properties</dt>
-  <dd>
-<pre>
-<%= JSON.stringify(obj.properties, null, "  ") %>
-</pre>
-  </dd>
-</dl>
+      <dt>Properties</dt>
+      <dd>
+    <pre>
+    <%= JSON.stringify(obj.properties, null, "  ") %>
+    </pre>
+      </dd>
+    </dl>
+  </div>
+  <div class="col-md-2">
+    <h5 class="pull-right"><a href="<%= obj["@iot.selfLink"] %>">API Link</a></h5>
+  </div>
+</div>
