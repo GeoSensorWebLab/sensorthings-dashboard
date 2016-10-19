@@ -15,7 +15,10 @@ class ResultView {
     this.baseOptions = {};
     this.updateBaseOptions();
 
-    this.statisticsView = new StatisticsView(this.$element.find(".observation-statistics"));
+    this.statisticsView = new StatisticsView(
+      this.$element.find(".observation-statistics"),
+      this.datastream.get("unitOfMeasurement")
+    );
 
     this.render();
   }

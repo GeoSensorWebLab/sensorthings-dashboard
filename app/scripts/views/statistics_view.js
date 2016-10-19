@@ -2,8 +2,9 @@
 // Call update() with an array of Observations to render statistics for that
 // set of Observations.
 class StatisticsView {
-  constructor(elementSelector) {
+  constructor(elementSelector, unitOfMeasurement) {
     this.$element = $(elementSelector);
+    this.unitOfMeasurement = unitOfMeasurement;
     this.render();
   }
 
@@ -61,10 +62,11 @@ class StatisticsView {
       };
     }
 
-    this.$element.find('.last-value').html(formatNumber(last));
-    this.$element.find('.min-value').html(formatNumber(min));
-    this.$element.find('.max-value').html(formatNumber(max));
-    this.$element.find('.average-value').html(formatNumber(average));
+    var unit = " " + this.unitOfMeasurement.symbol;
+    this.$element.find('.last-value').html(formatNumber(last) + unit);
+    this.$element.find('.min-value').html(formatNumber(min) + unit);
+    this.$element.find('.max-value').html(formatNumber(max) + unit);
+    this.$element.find('.average-value').html(formatNumber(average) + unit);
   }
 }
 
