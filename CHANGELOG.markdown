@@ -2,6 +2,18 @@
 
 A list of changes and fixes for each release.
 
+## v0.7.0 (2016-10-19)
+
+* Include fix from Eclise Whiskers that caused query options in AJAX requests to be recursively repeated
+* Implement a chart wrapper class to make swapping chart libraries a bit easier
+* Switch to using Highcharts Stock Chart for displaying time series data, as further development with C3.js will require me to do chart and aggregation coding when development is needed elsewhere
+* Switch to use of the web build of Eclipse Whiskers, thus removing a duplication of JQuery and Q Promise libraries
+* Filter non-numeric values from datastream observations statistics table, which was causing NULL values in calculations
+* Add HTML links to go directly to the entities in the browser
+* Add convenient time range buttons for common time ranges
+* Display the datastream units in the summary table
+* Add NPM shrinkwrap file as a lockfile is useful for providing a repeatable dependency environment for the Node application
+
 ## v0.6.0 (2016-05-20)
 
 * Update documentation for project now that it is public

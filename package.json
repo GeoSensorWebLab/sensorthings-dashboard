@@ -1,6 +1,6 @@
 {
   "name": "simple-sta-dashboard",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Simple SensorThings Dashboard",
   "private": "yes",
   "main": "index.js",
