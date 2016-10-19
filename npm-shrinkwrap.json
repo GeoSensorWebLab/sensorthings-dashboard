@@ -289,7 +289,8 @@
     "bcrypt-pbkdf": {
       "version": "1.0.0",
       "from": "bcrypt-pbkdf@>=1.0.0 <2.0.0",
-      "resolved": "https://registry.npmjs.org/bcrypt-pbkdf/-/bcrypt-pbkdf-1.0.0.tgz"
+      "resolved": "https://registry.npmjs.org/bcrypt-pbkdf/-/bcrypt-pbkdf-1.0.0.tgz",
+      "optional": true
     },
     "binaryextensions": {
       "version": "2.0.0",
@@ -1324,7 +1325,8 @@
     "ecc-jsbn": {
       "version": "0.1.1",
       "from": "ecc-jsbn@>=0.1.1 <0.2.0",
-      "resolved": "https://registry.npmjs.org/ecc-jsbn/-/ecc-jsbn-0.1.1.tgz"
+      "resolved": "https://registry.npmjs.org/ecc-jsbn/-/ecc-jsbn-0.1.1.tgz",
+      "optional": true
     },
     "eclipse-whiskers": {
       "version": "0.0.0",
@@ -1404,7 +1406,8 @@
         "source-map": {
           "version": "0.1.43",
           "from": "source-map@>=0.1.30 <0.2.0",
-          "resolved": "https://registry.npmjs.org/source-map/-/source-map-0.1.43.tgz"
+          "resolved": "https://registry.npmjs.org/source-map/-/source-map-0.1.43.tgz",
+          "optional": true
         }
       }
     },
@@ -1994,7 +1997,8 @@
     "jodid25519": {
       "version": "1.0.2",
       "from": "jodid25519@>=1.0.0 <2.0.0",
-      "resolved": "https://registry.npmjs.org/jodid25519/-/jodid25519-1.0.2.tgz"
+      "resolved": "https://registry.npmjs.org/jodid25519/-/jodid25519-1.0.2.tgz",
+      "optional": true
     },
     "jquery": {
       "version": "2.2.4",
@@ -2014,7 +2018,8 @@
     "jsbn": {
       "version": "0.1.0",
       "from": "jsbn@>=0.1.0 <0.2.0",
-      "resolved": "https://registry.npmjs.org/jsbn/-/jsbn-0.1.0.tgz"
+      "resolved": "https://registry.npmjs.org/jsbn/-/jsbn-0.1.0.tgz",
+      "optional": true
     },
     "jsesc": {
       "version": "0.5.0",
@@ -3323,7 +3328,8 @@
     "tweetnacl": {
       "version": "0.14.3",
       "from": "tweetnacl@>=0.14.0 <0.15.0",
-      "resolved": "https://registry.npmjs.org/tweetnacl/-/tweetnacl-0.14.3.tgz"
+      "resolved": "https://registry.npmjs.org/tweetnacl/-/tweetnacl-0.14.3.tgz",
+      "optional": true
     },
     "type-is": {
       "version": "1.6.13",
@@ -3337,8 +3343,8 @@
     },
     "uglify-js": {
       "version": "2.7.3",
-      "from": "uglify-js@>=2.6.0 <3.0.0",
-      "resolved": "https://registry.npmjs.org/uglify-js/-/uglify-js-2.7.3.tgz",
+      "from": "git://github.com/mishoo/UglifyJS2.git#harmony",
+      "resolved": "git://github.com/mishoo/UglifyJS2.git#88f6ff38d156fac213191e9e5cbe735819686a08",
       "dependencies": {
         "async": {
           "version": "0.2.10",
