@@ -5,30 +5,12 @@ class MapView {
     // Update query params in URL, get SensorThings URL from query params
     // or from LocalStorage.
     App.ParamsController.activate();
-    var ST = new App.SensorThings(App.ParamsController.get("stURL"));
-
-    // Things
-    var Things = ST.getThings({
-      data: {
-        "$expand": "Datastreams,Locations"
-      }
-    });
+    this.ST = new App.SensorThings(App.ParamsController.get("stURL"));
 
     this.MapManager = null;
     this.initMap();
 
-    // Data Load Handler
-    Q(Things).then((things) => {
-      // Populate List
-      things.forEach(this.addThingToList, this);
-
-      // Load feature markers asynchronously.
-      things.forEach(this.addThingToMap, this);
-
-      // Enable marker hover highlight
-      this.activateMarkerHighlighting(things);
-    })
-    .done();
+    this.loadThings();
 
     // Hide zoom controls for mobile — pinch zoom is more reliable there
     $(".leaflet-control-container").addClass("hidden-sm-down");
@@ -126,6 +108,33 @@ class MapView {
   initMap() {
     this.MapManager = new BaseMap('map');
     this.MapManager.map.setView([51.049, -114.08], 8);
+  }
+
+  // Retrieve Things from the server (defined in settings) and add them to
+  // the "sensor stations" list.
+  // If `filter` is undefined, the latest 100 Things will be returned.
+  loadThings(filter) {
+    var queryParams = { "$expand": "Datastreams,Locations" };
+    if (filter !== undefined) {
+      queryParams["$filter"] = filter;
+    }
+
+    var Things = this.ST.getThings({
+      data: queryParams
+    });
+
+    // Data Load Handler
+    Q(Things).then((things) => {
+      // Populate List
+      things.forEach(this.addThingToList, this);
+
+      // Load feature markers asynchronously.
+      things.forEach(this.addThingToMap, this);
+
+      // Enable marker hover highlight
+      this.activateMarkerHighlighting(things);
+    })
+    .done();
   }
 }
 
