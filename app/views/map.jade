@@ -18,23 +18,34 @@ html
     div#content.container-fluid
       div.row
         div#things-list.col-xs-12.col-md-3.sidebar.hidden-sm-down
+          form#things-search
+            div.form-group.row
+              div.col-xs-9
+                input.form-control(type="search", placeholder="Search", name="query")
+                div.form-warning
+                  p.muted Search is case sensitive
+              div.col-xs-3
+                button.btn.btn-primary
+                  | Go
+
+
           h5 Sensor Stations
-          
+
           ul.list-group
-        
+
         div#map-container.col-xs-12.col-sm-12.col-md-9.col-md-offset-3
           div#map
             noscript
               h1 JavaScript is Not Enabled
               p This site requires JavaScript to be enabled to properly retrieve and display data.
-      
+
       div#mobile-footer.hidden-md-up.navbar-fixed-bottom.bg-inverse
         div.row
           div.col-sm-6
             button.btn.btn-primary.show-things-list &larr; View Sensors List
           div.col-sm-6.pull-xs-right
             button.btn.btn-primary.show-things-map.pull-xs-right View Sensors Map &rarr;
-    
+
     script(type="text/javascript").
       $(function() {
         new App.Views.MapView();

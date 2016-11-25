@@ -9,7 +9,9 @@ class MapView {
 
     this.MapManager = null;
     this.initMap();
+    this.initSearch();
 
+    this.clearList();
     this.loadThings();
 
     // Hide zoom controls for mobile — pinch zoom is more reliable there
@@ -86,6 +88,10 @@ class MapView {
     .done();
   }
 
+  clearList() {
+    $("#things-list ul").empty();
+  }
+
   enableMobileSwitcher() {
     $(".show-things-list").click(() => {
       $("#things-list").toggleClass("hidden-sm-down");
@@ -108,6 +114,30 @@ class MapView {
   initMap() {
     this.MapManager = new BaseMap('map');
     this.MapManager.map.setView([51.049, -114.08], 8);
+  }
+
+  initSearch() {
+    var $input = $("#things-search input[name=query]");
+    var $formWarning = $("#things-search .form-warning");
+
+    $input.on({
+      blur: () => { $formWarning.slideUp(); },
+      focus: () => { $formWarning.slideDown(); }
+    });
+
+    $("#things-search").on("submit", () => {
+      // Validate search query
+      var query = $input.val();
+      if (query === "") {
+        console.warn("Blank search query ignored.");
+      }  else {
+        this.clearList();
+        this.loadThings(`substringof('${query}',description)`);
+      }
+
+      // Prevent form submission
+      return false;
+    });
   }
 
   // Retrieve Things from the server (defined in settings) and add them to
