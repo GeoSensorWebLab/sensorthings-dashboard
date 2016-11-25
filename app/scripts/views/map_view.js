@@ -8,10 +8,12 @@ class MapView {
     this.ST = new App.SensorThings(App.ParamsController.get("stURL"));
 
     this.MapManager = null;
+    this.mapResults = L.layerGroup();
     this.initMap();
     this.initSearch();
 
     this.clearList();
+    this.clearMap();
     this.loadThings();
 
     // Hide zoom controls for mobile — pinch zoom is more reliable there
@@ -66,7 +68,11 @@ class MapView {
     .then((locations) => {
       var location = locations[0];
       if (location && location.get("location")) {
-        // Generate HTML for popup
+        var errors = geojsonhint.hint(location.get("location"));
+        if (errors.length > 0) {
+          console.warn("Location has invalid GeoJSON", encodeURI(location.get("@iot.selfLink")), errors);
+        } else {
+          // Generate HTML for popup
         var properties = $.extend({}, thing.attributes, {
           stURL: encodeURIComponent(App.ParamsController.get("stURL"))
         });
@@ -81,8 +87,11 @@ class MapView {
 
         var feature = L.geoJson(location.get("location"), {
           pointToLayer: createMarker
-        }).addTo(this.MapManager.map);
+        })
+
+        feature.addTo(this.mapResults);
         thing.set("mapFeature", feature);
+        }
       }
     })
     .done();
@@ -90,6 +99,10 @@ class MapView {
 
   clearList() {
     $("#things-list ul").empty();
+  }
+
+  clearMap() {
+    this.mapResults.clearLayers();
   }
 
   enableMobileSwitcher() {
@@ -114,6 +127,7 @@ class MapView {
   initMap() {
     this.MapManager = new BaseMap('map');
     this.MapManager.map.setView([51.049, -114.08], 8);
+    this.mapResults.addTo(this.MapManager.map);
   }
 
   initSearch() {
@@ -132,6 +146,7 @@ class MapView {
         console.warn("Blank search query ignored.");
       }  else {
         this.clearList();
+        this.clearMap();
         this.loadThings(`substringof('${query}',description)`);
       }
 
