@@ -33,13 +33,9 @@ class ThingView {
       // Load feature marker
       Q(thing.locations)
       .then((locations) => {
-        var location = locations[0];
-        if (location && location.get("location")) {
-          this.addToMap(thing, location);
-        } else {
-          console.warn("Location could not be added to Map. Check `location` attribute.");
-        }
-      });
+        this.drawLocation(thing, locations[0]);
+      })
+      .done();
 
       // Load Datastreams
       Q(thing.getDatastreams({
@@ -55,7 +51,30 @@ class ThingView {
     .done();
   }
 
-  addToMap(thing, location) {
+  // If the Thing has a valid Location, then add it to the map. Otherwise
+  // display a warning message instead of the map.
+  drawLocation(thing, location) {
+    if (location === undefined) {
+      // no location
+      this.replaceMap("Thing has no Locations.");
+      console.warn("Thing has no Locations.", thing.get("@iot.selfLink"));
+    } else if (location.get("location") === undefined) {
+      // No GeoJSON Object
+      this.replaceMap("Location has no GeoJSON property.");
+      console.warn("Location has no GeoJSON property", location.get("@iot.selfLink"));
+    } else {
+      var errors = geojsonhint.hint(location.get("location"));
+      if (errors.length > 0) {
+        // GeoJSON errors
+        this.replaceMap("Location has invalid GeoJSON.");
+        console.warn("Location has invalid GeoJSON", location.get("@iot.selfLink"), errors);
+      } else {
+        this.addThingToMap(thing, location);
+      }
+    }
+  }
+
+  addThingToMap(thing, location) {
     // Generate HTML for popup
     var properties = $.extend({}, thing.attributes, {
       stURL: encodeURIComponent(App.ParamsController.get("stURL"))
@@ -98,6 +117,12 @@ class ThingView {
     });
   }
 
+  replaceMap(message) {
+    this.MapManager.map.remove();
+    var $alert = $("<div></div>").addClass("alert alert-danger").text(message);
+    $("#map").append($alert);
+  }
+
   renderDatastream(datastream) {
     // Draw template for each datastream
     var $template = $(JST["datastream-card"](datastream.attributes));
@@ -127,8 +152,13 @@ class ThingView {
   }
 
   renderMetadata(thing) {
+    var locationDescription = "";
+    if (thing.locations[0] !== undefined) {
+      locationDescription = thing.locations[0].get("description");
+    }
+
     var properties = $.extend({}, thing.attributes, {
-      locationDescription: thing.locations[0].get("description")
+      locationDescription: locationDescription
     });
     var template = JST["thing-info"](properties);
     $("#thing-info").html(template);
