@@ -25,6 +25,9 @@ class ThingView {
     this.dateChangeFunctions = [];
     this.initTimeRangePicker();
 
+    // Paste Controls
+    this.initPasteControls(Thing);
+
     // Data Load Handler
     Q(Thing).then((thing) => {
       // Load Metadata
@@ -98,6 +101,30 @@ class ThingView {
   initMap() {
     this.MapManager = new StaticMap('map');
     this.MapManager.map.setView([51.049, -114.08], 13);
+  }
+
+  initPasteControls(Thing) {
+    $("#paste-toggle").on("click", () => {
+      $(".paste-controls").toggle();
+    });
+
+    $("#load-thing").on("click", this.loadThing);
+
+    Q(Thing).then((thing) => {
+      $("#thing-link").val(thing.get("@iot.selfLink"));
+    }).done();
+  }
+
+  loadThing() {
+    var thingLink = $("#thing-link").val();
+    if (thingLink.length > 0) {
+      var matches = thingLink.match(/Things\((\d+)\)/);
+      var id = matches[1];
+      if (id !== undefined) {
+        var stURL = encodeURIComponent(App.ParamsController.get("stURL"));
+        location.assign(location.origin + `/thing.html?stURL=${stURL}&id=${id}`);
+      }
+    }
   }
 
   // Create the Time Range Picker.

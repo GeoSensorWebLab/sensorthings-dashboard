@@ -1,8 +1,8 @@
 // Start with your Sass styles here.
 
-/* Move down content because we have a fixed navbar that is 50px tall */
+/* Move down content because we have a fixed navbar */
 #content {
-  padding-top: 50px;
+  padding-top: 10px;
 }
 
 .sub-header {
@@ -146,4 +146,8 @@ button.show-things-map {
 
 .muted {
   color: #888;
+}
+
+.paste-controls {
+  display: none;
 }

@@ -18,6 +18,15 @@ html
 
     div#content.container
       div.row
+        div.col-sm-10
+          input#thing-link.paste-controls.form-control(type="text",name="thingLink")
+        div.col-sm-1
+          button#load-thing.paste-controls.btn.btn-primary
+            | Load
+        div.col-sm-1
+          button#paste-toggle.btn.btn-secondary.pull-right
+            i.fa.fa-clipboard
+      div.row
         div.col-sm-12
           h1#thing-description.page_header Loading&hellip;
 
