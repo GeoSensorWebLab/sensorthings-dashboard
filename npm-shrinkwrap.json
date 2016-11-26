@@ -2104,9 +2104,9 @@
       "resolved": "https://registry.npmjs.org/lcid/-/lcid-1.0.0.tgz"
     },
     "leaflet": {
-      "version": "0.7.7",
-      "from": "leaflet@>=0.7.7 <0.8.0",
-      "resolved": "https://registry.npmjs.org/leaflet/-/leaflet-0.7.7.tgz"
+      "version": "1.0.2",
+      "from": "leaflet@1.0.2",
+      "resolved": "https://registry.npmjs.org/leaflet/-/leaflet-1.0.2.tgz"
     },
     "leven": {
       "version": "1.0.2",
