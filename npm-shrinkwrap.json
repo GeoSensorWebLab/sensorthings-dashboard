@@ -2541,9 +2541,9 @@
       "resolved": "https://registry.npmjs.org/pinkie-promise/-/pinkie-promise-2.0.1.tgz"
     },
     "pluralize": {
-      "version": "1.2.1",
-      "from": "pluralize@>=1.2.1 <2.0.0",
-      "resolved": "https://registry.npmjs.org/pluralize/-/pluralize-1.2.1.tgz"
+      "version": "3.0.0",
+      "from": "pluralize@3.0.0",
+      "resolved": "https://registry.npmjs.org/pluralize/-/pluralize-3.0.0.tgz"
     },
     "private": {
       "version": "0.1.6",
