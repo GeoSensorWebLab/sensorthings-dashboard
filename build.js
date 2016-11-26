@@ -1,5 +1,6 @@
 var broccoli            = require('broccoli');
 var copyDereferenceSync = require('copy-dereference').sync;
+var filesize            = require('broccoli-file-size');
 var fs                  = require('fs');
 var Q                   = require('q');
 var rimraf              = require('rimraf');
@@ -14,6 +15,8 @@ function clean(directory) {
 // Build application
 function build(output) {
   var node = broccoli.loadBrocfile();
+  node = new filesize(node, { gzipped: false });
+
   var builder = new broccoli.Builder(node);
   return builder.build()
     .then(function (hash) {
