@@ -1,5 +1,6 @@
 // Start with your ES5/6/7 script here.
 // Import other files or use Browserify require statements.
+import Downloader from './downloader';
 import MapView from './views/map_view';
 import ParamsController from './params_controller';
 import Settings from './settings';
@@ -18,3 +19,5 @@ window.App = {
     ThingView:    ThingView
   }
 };
+
+window.Downloader = Downloader;

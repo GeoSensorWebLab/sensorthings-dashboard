@@ -6,11 +6,12 @@ var SensorThingsDateFormat = "YYYY-MM-DDTHH:mm:ss.SSSZ";
 
 class ResultView {
   constructor(datastream, elementSelector, options = {}) {
-    this.datastream = datastream;
-    this.$element   = $(elementSelector);
-    this.id         = datastream.get("@iot.id");
-    this.startDate  = options.startDate;
-    this.endDate    = options.endDate;
+    this.datastream        = datastream;
+    this.$element          = $(elementSelector);
+    this.id                = datastream.get("@iot.id");
+    this.startDate         = options.startDate;
+    this.endDate           = options.endDate;
+    this.observationsCache = [];
 
     this.baseOptions = {};
     this.updateBaseOptions();
@@ -32,6 +33,26 @@ class ResultView {
     }
   }
 
+  cacheObservations(observations) {
+    this.observationsCache = observations.sort(function(a, b) {
+      return moment(a.get("phenomenonTime")) - moment(b.get("phenomenonTime"));
+    });
+  }
+
+  // Convert observations to CSV then download to file
+  downloadObservationsCSV() {
+    var data = `datastream,${this.datastream.get("@iot.selfLink")}\n`;
+    data += "phenomenonTime,resultTime,result\n";
+    data += this.observationsCache.map((o) => {
+      return [
+        o.get("phenomenonTime"),
+        o.get("resultTime"),
+        o.get("result")
+      ].join(",");
+    }).join("\n");
+    Downloader(data, `datastream-${this.id}-observations.csv`, "text/csv");
+  }
+
   drawChart() {
     // Draw an empty chart
     this.$element.find(`#datastream-${this.id}-result`);
@@ -41,10 +62,10 @@ class ResultView {
       unitOfMeasurement: this.datastream.get("unitOfMeasurement")
     });
 
-    Q(this.datastream.getAllObservations({
-      data: this.baseOptions
-    }))
+    Q(this.datastream.getAllObservations({ data: this.baseOptions}))
     .then((observations) => {
+      this.cacheObservations(observations);
+
       $(`#datastream-${this.id}-card .observations-count`)
       .html(`<p>${observations.length} ${pluralize('Observation', observations.length)}</p>`);
 

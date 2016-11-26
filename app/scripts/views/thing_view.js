@@ -174,6 +174,10 @@ class ThingView {
       this.dateChangeFunctions.push((startDate, endDate) => {
         view.update(startDate, endDate);
       });
+
+      $template.find(".download-csv").on("click", () => {
+        view.downloadObservationsCSV();
+      });
     })
     .done();
   }
