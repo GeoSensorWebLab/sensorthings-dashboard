@@ -2,6 +2,37 @@
 
 A list of changes and fixes for each release.
 
+## v0.8.0 (2016-11-25)
+
+### FEATURES
+
+* Add case-sensitive search filter for Things
+* Validate GeoJSON for Locations and prevent bad GeoJSON from causing errors with LeafletJS
+* Display a warning if Location cannot be used for some reason
+* Add button to show a text box to paste a Thing's link to quickly switch the current Thing. It only reads the id number and will ignore another server's host/port/path!
+* Add button for downloading all loaded Observations in a Datastream to a CSV file
+* Add build script to compile to public directory (displays build file sizes)
+* Zoom map around results after loading
+* Use colour and size to show active marker
+
+### FIXES
+
+* Fix UglifyJS to work with ES Harmony source code
+* Change "LOGO" to "Dashboard" in title bar
+* Remove c3 and d3 libraries as they are not used
+* Decrease styling prominence for the Datastream "Details" toggle
+* Remove tiny-lr as it is not being used
+
+### UPDATES
+
+* Upgrade pluralize to 3.0.0
+* Upgrade leaflet to 1.0.2
+* Upgrade JQuery to 3.1.1
+* Upgrade Bootstrap to v4.alpha-5
+* Upgrade Highcharts to 5.0.4
+* Upgrade broccoli-concat 3.0.5
+* Upgrade broccoli-slow-trees to 3.0.1
+
 ## v0.7.0 (2016-10-19)
 
 * Include fix from Eclise Whiskers that caused query options in AJAX requests to be recursively repeated
