@@ -324,28 +324,6 @@
       "from": "bn.js@>=4.1.1 <5.0.0",
       "resolved": "https://registry.npmjs.org/bn.js/-/bn.js-4.11.6.tgz"
     },
-    "body-parser": {
-      "version": "1.14.2",
-      "from": "body-parser@>=1.14.0 <1.15.0",
-      "resolved": "https://registry.npmjs.org/body-parser/-/body-parser-1.14.2.tgz",
-      "dependencies": {
-        "http-errors": {
-          "version": "1.3.1",
-          "from": "http-errors@>=1.3.1 <1.4.0",
-          "resolved": "https://registry.npmjs.org/http-errors/-/http-errors-1.3.1.tgz"
-        },
-        "iconv-lite": {
-          "version": "0.4.13",
-          "from": "iconv-lite@0.4.13",
-          "resolved": "https://registry.npmjs.org/iconv-lite/-/iconv-lite-0.4.13.tgz"
-        },
-        "qs": {
-          "version": "5.2.0",
-          "from": "qs@5.2.0",
-          "resolved": "https://registry.npmjs.org/qs/-/qs-5.2.0.tgz"
-        }
-      }
-    },
     "boom": {
       "version": "2.10.1",
       "from": "boom@>=2.0.0 <3.0.0",
@@ -894,11 +872,6 @@
       "version": "0.0.7",
       "from": "builtins@>=0.0.3 <0.1.0",
       "resolved": "https://registry.npmjs.org/builtins/-/builtins-0.0.7.tgz"
-    },
-    "bytes": {
-      "version": "2.2.0",
-      "from": "bytes@2.2.0",
-      "resolved": "https://registry.npmjs.org/bytes/-/bytes-2.2.0.tgz"
     },
     "cached-path-relative": {
       "version": "1.0.0",
@@ -1551,11 +1524,6 @@
         }
       }
     },
-    "faye-websocket": {
-      "version": "0.10.0",
-      "from": "faye-websocket@>=0.10.0 <0.11.0",
-      "resolved": "https://registry.npmjs.org/faye-websocket/-/faye-websocket-0.10.0.tgz"
-    },
     "filesize": {
       "version": "3.3.0",
       "from": "filesize@>=3.1.3 <4.0.0",
@@ -2150,11 +2118,6 @@
       "from": "lexical-scope@>=1.1.0 <1.2.0",
       "resolved": "https://registry.npmjs.org/lexical-scope/-/lexical-scope-1.1.1.tgz"
     },
-    "livereload-js": {
-      "version": "2.2.2",
-      "from": "livereload-js@>=2.2.0 <3.0.0",
-      "resolved": "https://registry.npmjs.org/livereload-js/-/livereload-js-2.2.2.tgz"
-    },
     "load-json-file": {
       "version": "1.1.0",
       "from": "load-json-file@>=1.0.0 <2.0.0",
@@ -2668,23 +2631,6 @@
       "version": "1.2.0",
       "from": "range-parser@>=1.2.0 <1.3.0",
       "resolved": "https://registry.npmjs.org/range-parser/-/range-parser-1.2.0.tgz"
-    },
-    "raw-body": {
-      "version": "2.1.7",
-      "from": "raw-body@>=2.1.5 <2.2.0",
-      "resolved": "https://registry.npmjs.org/raw-body/-/raw-body-2.1.7.tgz",
-      "dependencies": {
-        "bytes": {
-          "version": "2.4.0",
-          "from": "bytes@2.4.0",
-          "resolved": "https://registry.npmjs.org/bytes/-/bytes-2.4.0.tgz"
-        },
-        "iconv-lite": {
-          "version": "0.4.13",
-          "from": "iconv-lite@0.4.13",
-          "resolved": "https://registry.npmjs.org/iconv-lite/-/iconv-lite-0.4.13.tgz"
-        }
-      }
     },
     "read-only-stream": {
       "version": "2.0.0",
@@ -3267,18 +3213,6 @@
         }
       }
     },
-    "tiny-lr": {
-      "version": "0.2.1",
-      "from": "tiny-lr@0.2.1",
-      "resolved": "https://registry.npmjs.org/tiny-lr/-/tiny-lr-0.2.1.tgz",
-      "dependencies": {
-        "qs": {
-          "version": "5.1.0",
-          "from": "qs@>=5.1.0 <5.2.0",
-          "resolved": "https://registry.npmjs.org/qs/-/qs-5.1.0.tgz"
-        }
-      }
-    },
     "tmp": {
       "version": "0.0.28",
       "from": "tmp@0.0.28",
@@ -3536,16 +3470,6 @@
       "version": "0.3.1",
       "from": "walk-sync@>=0.3.1 <0.4.0",
       "resolved": "https://registry.npmjs.org/walk-sync/-/walk-sync-0.3.1.tgz"
-    },
-    "websocket-driver": {
-      "version": "0.6.5",
-      "from": "websocket-driver@>=0.5.1",
-      "resolved": "https://registry.npmjs.org/websocket-driver/-/websocket-driver-0.6.5.tgz"
-    },
-    "websocket-extensions": {
-      "version": "0.1.1",
-      "from": "websocket-extensions@>=0.1.1",
-      "resolved": "https://registry.npmjs.org/websocket-extensions/-/websocket-extensions-0.1.1.tgz"
     },
     "which": {
       "version": "1.2.12",
