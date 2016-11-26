@@ -15,7 +15,7 @@
   "license": "EPL-1.0",
   "dependencies": {
     "babel": "^6.1.18",
-    "bootstrap": "git+https://github.com/twbs/bootstrap.git#v4.0.0-alpha.2",
+    "bootstrap": "git+https://github.com/twbs/bootstrap.git#v4.0.0-alpha.5",
     "broccoli": "^0.16.3",
     "broccoli-babel-transpiler": "^5.5.0",
     "broccoli-browserify": "^0.1.0",
@@ -38,7 +38,7 @@
     "express": "^4.7.2",
     "font-awesome": "^4.5.0",
     "highcharts": "^4.2.6",
-    "jquery": "^2.1.4",
+    "jquery": "^3.1.1",
     "jquery-datetimepicker": "git+https://github.com/GeoSensorWebLab/momentjs-datetimepicker.git",
     "leaflet": "^1.0.2",
     "moment": "^2.13.0",
