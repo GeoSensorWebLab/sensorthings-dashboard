@@ -63,7 +63,7 @@ helper.loadLibrary('node_modules/tether/dist', {
 helper.loadLibrary('node_modules/bootstrap/dist', {
   scripts: ['js/bootstrap.js'],
   styles: ['css/bootstrap.css'],
-  assets: ['']
+  assets: []
 });
 
 helper.loadLibrary('node_modules/font-awesome', {
