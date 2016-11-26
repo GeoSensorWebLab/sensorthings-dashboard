@@ -37,7 +37,7 @@
     "eclipse-whiskers": "git+https://github.com/eclipse/whiskers.git#b7a8d139eebc222156ea2d59b799b93717dfc4b0",
     "express": "^4.7.2",
     "font-awesome": "^4.5.0",
-    "highcharts": "^4.2.6",
+    "highcharts": "^5.0.4",
     "jquery": "^3.1.1",
     "jquery-datetimepicker": "git+https://github.com/GeoSensorWebLab/momentjs-datetimepicker.git",
     "leaflet": "^1.0.2",

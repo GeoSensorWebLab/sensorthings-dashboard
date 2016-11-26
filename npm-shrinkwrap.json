@@ -1781,9 +1781,9 @@
       "resolved": "https://registry.npmjs.org/heimdalljs-logger/-/heimdalljs-logger-0.1.7.tgz"
     },
     "highcharts": {
-      "version": "4.2.7",
-      "from": "highcharts@>=4.2.6 <5.0.0",
-      "resolved": "https://registry.npmjs.org/highcharts/-/highcharts-4.2.7.tgz"
+      "version": "5.0.4",
+      "from": "highcharts@5.0.4",
+      "resolved": "https://registry.npmjs.org/highcharts/-/highcharts-5.0.4.tgz"
     },
     "hoek": {
       "version": "2.16.3",
