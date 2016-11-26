@@ -19,7 +19,7 @@ var BroccoliHelper = {
   // Returns a tree with a single file, `libraries.js`
   getScriptsTree() {
     return concat(libraryTree, {
-      inputFiles: scripts,
+      headerFiles: scripts,
       outputFile: 'libraries.js'
     });
   },
@@ -29,7 +29,7 @@ var BroccoliHelper = {
   // Returns a tree with a single file, `libraries.css`
   getStylesTree() {
     return concat(libraryTree, {
-      inputFiles: styles,
+      headerFiles: styles,
       outputFile: 'libraries.css'
     });
   },

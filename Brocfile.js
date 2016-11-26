@@ -118,7 +118,7 @@ helper.loadLibrary('vendor', {
 // Merge the libraries tree with the app scripts tree, then concatenate into
 // a single script file.
 var allScripts = concat(mergeTrees([helper.getScriptsTree(), scripts]), {
-  inputFiles: ['libraries.js', 'app.js'],
+  headerFiles: ['libraries.js', 'app.js'],
   outputFile: 'app.js'
 });
 
@@ -130,7 +130,7 @@ if (process.env["NODE_ENV"] === "production") {
 
 // == Concatenate style trees ==
 var allStyles = concat(mergeTrees([helper.getStylesTree(), styles]), {
-  inputFiles: ['libraries.css', 'app.css'],
+  headerFiles: ['libraries.css', 'app.css'],
   outputFile: 'style.css',
   sourceMapConfig: {
     enabled: false,
