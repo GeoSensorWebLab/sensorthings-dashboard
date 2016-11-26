@@ -1,4 +1,3 @@
-import C3Chart from './c3_chart';
 import StockChart from './stock_chart';
 
 // Wrapper for chart libraries.
