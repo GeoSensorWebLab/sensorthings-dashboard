@@ -8,7 +8,7 @@ class MapView {
     this.ST = new App.SensorThings(App.ParamsController.get("stURL"));
 
     this.MapManager = null;
-    this.mapResults = L.layerGroup();
+    this.mapResults = L.featureGroup();
     this.initMap();
     this.initSearch();
 
@@ -63,38 +63,33 @@ class MapView {
     $("#things-list ul").append(template);
   }
 
-  addThingToMap(thing) {
-    Q(thing.locations)
-    .then((locations) => {
-      var location = locations[0];
-      if (location && location.get("location")) {
-        var errors = geojsonhint.hint(location.get("location"));
-        if (errors.length > 0) {
-          console.warn("Location has invalid GeoJSON", encodeURI(location.get("@iot.selfLink")), errors);
-        } else {
-          // Generate HTML for popup
-        var properties = $.extend({}, thing.attributes, {
-          stURL: encodeURIComponent(App.ParamsController.get("stURL"))
-        });
-        var template = JST["marker-popup"](properties);
+  addLocationToMap(location, thing) {
+    if (location && location.get("location")) {
+      var errors = geojsonhint.hint(location.get("location"));
+      if (errors.length > 0) {
+        console.warn("Location has invalid GeoJSON", encodeURI(location.get("@iot.selfLink")), errors);
+      } else {
+        // Generate HTML for popup
+      var properties = $.extend({}, thing.attributes, {
+        stURL: encodeURIComponent(App.ParamsController.get("stURL"))
+      });
+      var template = JST["marker-popup"](properties);
 
-        // We use circle markers as we can style them with path CSS.
-        var createMarker = function(feature, latlng) {
-          var marker = L.circleMarker(latlng);
-          marker.bindPopup(template);
-          return marker;
-        };
+      // We use circle markers as we can style them with path CSS.
+      var createMarker = function(feature, latlng) {
+        var marker = L.circleMarker(latlng);
+        marker.bindPopup(template);
+        return marker;
+      };
 
-        var feature = L.geoJson(location.get("location"), {
-          pointToLayer: createMarker
-        })
+      var feature = L.geoJson(location.get("location"), {
+        pointToLayer: createMarker
+      })
 
-        feature.addTo(this.mapResults);
-        thing.set("mapFeature", feature);
-        }
+      feature.addTo(this.mapResults);
+      thing.set("mapFeature", feature);
       }
-    })
-    .done();
+    }
   }
 
   clearList() {
@@ -173,11 +168,21 @@ class MapView {
       // Populate List
       things.forEach(this.addThingToList, this);
 
-      // Load feature markers asynchronously.
-      things.forEach(this.addThingToMap, this);
+      // Convert array of things to array of promises to load location markers,
+      // then re-zoom when all promises are resolved.
+      Q.allSettled(things.map((thing) => {
+        return Q(thing.locations)
+        .then((locations) => {
+          var location = locations[0];
+          this.addLocationToMap(location, thing);
+        });
+      }, this))
+      .done(() => {
+        this.MapManager.map.fitBounds(this.mapResults.getBounds());
 
-      // Enable marker hover highlight
-      this.activateMarkerHighlighting(things);
+        // Enable marker hover highlight
+        this.activateMarkerHighlighting(things);
+      });
     })
     .done();
   }
