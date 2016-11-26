@@ -27,7 +27,7 @@
     "broccoli-jade": "^1.0.1",
     "broccoli-merge-trees": "^1.1.1",
     "broccoli-sass": "^0.7.0",
-    "broccoli-slow-trees": "^2.0.0",
+    "broccoli-slow-trees": "^3.0.1",
     "broccoli-template-builder": "git+https://github.com/GeoSensorWebLab/broccoli-template-builder.git",
     "broccoli-uglify-sourcemap": "^1.1.1",
     "browserify": "^13.0.0",

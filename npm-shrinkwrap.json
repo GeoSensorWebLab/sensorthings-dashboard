@@ -537,9 +537,9 @@
       }
     },
     "broccoli-slow-trees": {
-      "version": "2.0.0",
-      "from": "broccoli-slow-trees@>=2.0.0 <3.0.0",
-      "resolved": "https://registry.npmjs.org/broccoli-slow-trees/-/broccoli-slow-trees-2.0.0.tgz"
+      "version": "3.0.1",
+      "from": "broccoli-slow-trees@3.0.1",
+      "resolved": "https://registry.npmjs.org/broccoli-slow-trees/-/broccoli-slow-trees-3.0.1.tgz"
     },
     "broccoli-stew": {
       "version": "1.4.0",
