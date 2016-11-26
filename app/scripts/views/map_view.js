@@ -26,8 +26,8 @@ class MapView {
   activateMarkerHighlighting(things) {
     // Highlight markers when corresponding item is highlighted in list.
     // Only activate once things have been loaded
-    var activeStyle   = { opacity: 0.5, fillOpacity: 0.2 };
-    var inactiveStyle = { opacity: 0.05, fillOpacity: 0.05 };
+    var activeStyle   = { color: 'blue', opacity: 0.5, fillOpacity: 0.2, radius: 10 };
+    var inactiveStyle = { color: 'gray', opacity: 0.05, fillOpacity: 0.05, radius: 5 };
 
     $("#things-list .list-group-item").on("mouseenter click", function() {
       var id = $(this).data("id");
